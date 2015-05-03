@@ -32,3 +32,15 @@ cp dist/angular.dev.js ../../public/static/lib/angular2/
 ```
 tsc src/public/static/site/app.ts --target es6 --outDir public/static/site/
 ```
+
+### What I like to do next
+- [ ] use Broccoli task runner
+- [ ] use material design with polymer
+- [ ] routing with Angular new router
+- [ ] add authentication and connect MongoDB
+- [ ] use service worker
+- [ ] touch nginx
+- [ ] touch Docker
+- [ ] touch some cloud service
+- [ ] touch React
+- [ ] touch Dart
