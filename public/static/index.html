@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MEAN EDGE</title>
+    <script src="/public/static/lib/systemjs/system.js"></script></head>
+    <script src="/public/static/lib/angular2/angular2.dev.js"></script>
+<body>
+  <app></app>
+  <script>
+    System.config({
+      paths: {
+        'app': '/public/static/site/app.js'
+      }
+    });
+    System.import('app')
+  </script>
+</body>
+</html>
