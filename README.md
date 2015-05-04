@@ -2,15 +2,14 @@
 This is my personal sandbox to use cutting-edge features around MEAN (actually possibly included non-MEAN stack)
 
 ### NOTES
-
-#### install Node.js
-use official installer https://nodejs.org/download/ 
+#### Install Node.js
+use official installer https://nodejs.org/download/
 
 or use homebrew http://brew.sh/ ```brew install node```
 
 or use nvm https://github.com/creationix/nvm ```nvm istall 0.12```
 
-#### install npm global dependencies (required building angular2)
+#### Install npm global dependencies
 ```
 [sudo] npm install -g protractor
 [sudo] npm install -g gulp
@@ -19,31 +18,49 @@ or use nvm https://github.com/creationix/nvm ```nvm istall 0.12```
 [sudo] npm install -g bower
 ```
 
-#### install my app
+#### Install my app
 ```
 git clone https://github.com/memolog/mean-edge.git
 npm install
 ```
 
-#### start server
+#### Start server
+```
+gulp nodemon
+```
+
+or just initiate server.js
 ```
 node server.js
 ```
 
-#### get angular2 file with all dependencies
+#### Start server in development
+```
+gulp development
+```
+
+Start server with gulp nodemon task, and then watching file changes with gulp watch task.
+
+#### Get angular2 file with all dependencies
 ```
 cd node_modules/angular
 gulp bundle.js.dev.deps
 cp dist/angular.dev.js ../../public/static/lib/angular2/
 ```
 
-#### transpile My app
+#### Transpile Typescript to Javascript
+
+use gulp
+```
+gulp build.public.js
+```
+
+or use global tsc
 ```
 tsc src/public/static/site/app.ts --target es6 --outDir public/static/site/
 ```
 
 ### What I like to do next
-- [ ] use Broccoli task runner
 - [ ] use material design with polymer
 - [ ] routing with Angular new router
 - [ ] add authentication and use MongoDB
@@ -53,3 +70,4 @@ tsc src/public/static/site/app.ts --target es6 --outDir public/static/site/
 - [ ] touch some cloud service
 - [ ] touch React
 - [ ] touch Dart
+- [ ] touch Broccoli
