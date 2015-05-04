@@ -9,6 +9,7 @@ import {Component, View, bootstrap} from 'angular2/angular2';
   template: '<h1>Hello {{name}}</h1>'
 })
 class AppComponent {
+  name: string
   constructor(){
     this.name = 'Yutaka'
   }
