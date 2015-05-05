@@ -48,6 +48,16 @@ gulp bundle.js.dev.deps
 cp dist/angular.dev.js ../../public/static/lib/angular2/
 ```
 
+##### Trouble Shooting
+If you found a lot of typescritp errros such like ``` 1153 'let' declarations are only available when targeting ECMAScript 6 and higher.```, check angular2/node_modules/typecsript version. If you could find its version is 1.4.1, npm install typescript again in the angular2 directory.
+
+That is what it happened on me, but I'm not sure why I got the wrong version of typescript. Anyway, as far as you use typescript 1.5 higher, It should work fine.
+
+```
+cd node_modules/angular
+npm install typescript
+```
+
 #### Transpile Typescript to Javascript
 
 use gulp

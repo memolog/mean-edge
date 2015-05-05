@@ -23,12 +23,6 @@ app.use(favicon(root + '/public/static/favicon.ico'));
 
 app.use('/public/static',express.static(root + '/public/static'));
 
-// es6-module-loader fetches tracure.js in the root directory
-// so send file from the actual destination
-app.use('/traceur.js', function(req, res, next){
-  res.sendFile(root+'/public/static/lib/traceur/traceur.js');
-});
-
 app.use(logger('combined'));
 
 app.use(helmet.frameguard());
