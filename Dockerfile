@@ -1,0 +1,14 @@
+FROM node:0.12.2
+
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+ENV NODE_ENV production
+
+COPY package.json /usr/src/app/
+RUN npm install --verbose
+COPY . /usr/src/app
+
+EXPOSE 3000
+
+CMD [ "npm", "start" ]
