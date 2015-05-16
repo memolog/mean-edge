@@ -11,11 +11,16 @@ or use nvm https://github.com/creationix/nvm ```nvm istall 0.12```
 
 #### Install npm global dependencies
 ```
-[sudo] npm install -g protractor
 [sudo] npm install -g gulp
 [sudo] npm install -g typescript@^1.5.0-beta
 [sudo] npm install -g tsd@next
 [sudo] npm install -g bower
+```
+
+I use jspm to resolve some angular dependencies (system.js, rx, traceur and zone.js).
+You don't have to install jspm to use this repository since all of the dependencies are in the repository already.
+```
+[sudo] npm install -g jspm
 ```
 
 #### Install my app
@@ -41,8 +46,24 @@ gulp development
 
 Start server with gulp nodemon task, and then watching file changes with gulp watch task.
 
-#### Get angular2 file with all dependencies
+#### transpile angular2 files into ES5
 ```
+cd node_modules/angular2
+npm install
+cd es6/dev
+node es5build.js -d ../../es5
+```
+
+#### Build angular2 bundle with all dependencies
+Before install angular2 code from https://github.com/angular/angular, you might need to install protractor and tsd becuase they are required in the postinstall process
+
+```
+[sudo] npm install -g protractor
+[sudo] npm install -g tsd@next
+```
+
+```
+npm install angular/angular
 cd node_modules/angular
 gulp bundle.js.dev.deps
 cp dist/angular.dev.js ../../public/static/lib/angular2/

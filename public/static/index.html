@@ -2,18 +2,23 @@
 <html>
 <head>
   <title>MEAN EDGE</title>
-    <script src="/public/static/lib/systemjs/system.js"></script></head>
-    <script src="/public/static/lib/angular2/angular2.dev.js"></script>
+    <script src="/public/static/lib/reflect-metadata/Reflect.js"></script>
+    <script src="/public/static/lib/jspm_packages/es6-module-loader.js"></script>
+    <script src="/public/static/lib/jspm_packages/system.js"></script>
+    <script src="/public/static/config.js"></script></head>
+    <!-- <script src="/public/static/lib/angular/angular2.dev.js"></script> -->
 <body>
   <app></app>
   <script>
-    System.config({
-      paths: {
-        'app': '/public/static/site/app.js',
-        'traceur': '/public/static/lib/traceur/traceur.js'
-      }
-    });
-System.import('app')
+System.config({
+  paths:{
+    'angular2/*': 'lib/angular2/es5/*.js',
+  }
+});
+System.import('zone.js').then(function(Zone) {
+  zone = zone.fork(Zone.longStackTraceZone);
+  System.import('site/app')
+});
 </script>
 </body>
 </html>

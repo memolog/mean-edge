@@ -21,7 +21,8 @@ app.disable('x-powered-by');
 // favicon.icon
 app.use(favicon(root + '/public/static/favicon.ico'));
 
-app.use('/public/static',express.static(root + '/public/static'));
+app.use('/public/static', express.static(root + '/public/static'));
+app.use('/node_modules', express.static(root + '/node_modules'));
 
 app.use(logger('combined'));
 
@@ -31,9 +32,17 @@ app.use(helmet.noSniff());
 app.use(helmet.ieNoOpen());
 // app.use(csp);
 
-app.use('/', function(req, res, next) {
-  res.sendFile(root + '/public/static/index.html');
+var router = express.Router();
+router.get('/', function(req, res, next) {
+  return res.sendFile(root + '/public/static/index.html');
 });
+
+app.use('/', router);
+
+app.use(function(res, res) {
+  res.status(404);
+  res.send('Not Found');
+})
 
 app.listen(3000, function() {
   debug('Server start listing port ' + 3000);
