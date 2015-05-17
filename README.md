@@ -54,6 +54,17 @@ cd es6/dev
 node es5build.js -d ../../es5
 ```
 
+#### bunld my app with angular2 and zone.js
+```
+cd public/static
+jspm bundle site/app + zone.js app.js --inject
+```
+
+unbundle
+```
+jspm unbundle
+```
+
 #### Build angular2 bundle with all dependencies
 Before install angular2 code from https://github.com/angular/angular, you might need to install protractor and tsd becuase they are required in the postinstall process
 
