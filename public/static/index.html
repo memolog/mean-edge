@@ -5,16 +5,12 @@
     <script src="/public/static/lib/reflect-metadata/Reflect.js"></script>
     <script src="/public/static/lib/jspm_packages/es6-module-loader.js"></script>
     <script src="/public/static/lib/jspm_packages/system.js"></script>
-    <script src="/public/static/config.js"></script></head>
+    <script src="/public/static/config.js"></script>
     <!-- <script src="/public/static/lib/angular/angular2.dev.js"></script> -->
+</head>
 <body>
   <app></app>
   <script>
-System.config({
-  paths:{
-    'angular2/*': 'lib/angular2/es5/*.js',
-  }
-});
 System.import('zone.js').then(function(Zone) {
   zone = zone.fork(Zone.longStackTraceZone);
   System.import('site/app')
