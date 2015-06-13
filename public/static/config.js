@@ -6,6 +6,7 @@ System.config({
     "github:*": "lib/jspm_packages/github/*.js",
     "npm:*": "lib/jspm_packages/npm/*.js",
     "angular2/*": "lib/angular2/es5/*.js"
+    //"angular2/*": "lib/angular2/es6/dev/*.es6"
   }
 });
 
