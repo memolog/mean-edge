@@ -27,8 +27,10 @@
     "angular2": "^2.0.0-alpha.23",
     "gulp": "^3.8.11",
     "gulp-nodemon": "^2.0.3",
+    "gulp-shell": "^0.4.2",
     "gulp-typescript": "^2.6.0",
     "merge2": "^0.3.5",
+    "npm-check-updates": "^1.5.1",
     "typescript": "git://github.com/mhegazy/TypeScript.git#v1.5-beta"
   },
   "jspm": {
