@@ -7,13 +7,14 @@ use official installer https://nodejs.org/download/
 
 or use homebrew http://brew.sh/ ```brew install node```
 
-or use nvm https://github.com/creationix/nvm ```nvm istall 0.12```
+or use nvm https://github.com/creationix/nvm ```nvm istall 5.3.0```
+
+(I'm currently checking this repository with 5.3.0) 
 
 #### Install npm global dependencies
 ```
 [sudo] npm install -g gulp
-[sudo] npm install -g typescript@^1.5.0-beta
-[sudo] npm install -g tsd@next
+[sudo] npm install -g typescript
 [sudo] npm install -g bower
 ```
 
@@ -41,7 +42,7 @@ node server.js
 
 #### Start server in development
 ```
-gulp development
+gulp develop
 ```
 
 Start server with gulp nodemon task, and then watching file changes with gulp watch task.
@@ -70,7 +71,6 @@ Before install angular2 code from https://github.com/angular/angular, you might 
 
 ```
 [sudo] npm install -g protractor
-[sudo] npm install -g tsd@next
 ```
 
 ```

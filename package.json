@@ -8,8 +8,8 @@
     "url": "https://github.com/memolog/mean-edge"
   },
   "endines": {
-    "node": "~0.12.2",
-    "npm": "~2.7.5"
+    "node": "~0.5.3",
+    "npm": "~3.3.12"
   },
   "script": {
     "start": "server.js"
@@ -31,7 +31,7 @@
     "gulp-typescript": "^2.6.0",
     "merge2": "^0.3.5",
     "npm-check-updates": "^1.5.1",
-    "typescript": "git://github.com/mhegazy/TypeScript.git#v1.5-beta"
+    "typescript": "1.7.3"
   },
   "jspm": {
     "directories": {
