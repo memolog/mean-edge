@@ -125,6 +125,10 @@ After you access the local server, you can see nginx logs in the terminal.
 
 If You want to stop docker components, execut ```docker-compose stop``` or Control+C in the terminal.
 
+### Separate role between client and server
+- server: render an agnostic data and cache it
+- client: render authenticated or user/device specific data
+
 ### What I like to do next
 - [ ] use material design with polymer
 - [ ] routing with Angular new router
