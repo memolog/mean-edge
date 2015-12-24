@@ -4,7 +4,7 @@ module.exports = {
   context: __dirname,
   devtool: 'source-map',
   entry: {
-    'app': '../frontend/public_src/static/site/boot.ts'
+    'app': '../frontend/src/static/site/boot.ts'
   },
   output: {
     path: path.resolve(__dirname + '/../frontend/public/static/site/'),

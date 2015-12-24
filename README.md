@@ -51,6 +51,7 @@ git clone https://github.com/memolog/mean-edge.git
 cd mean-edge
 npm install
 npm run tsd-install // Install TypeScript Definitions
+npm run webpack // Bundle modules
 ```
 
 #### Start server in development
