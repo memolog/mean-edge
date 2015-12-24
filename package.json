@@ -1,37 +1,27 @@
 {
   "name": "meanedge",
   "description": "This is my personal sandbox to use the cutting-edge features around MEAN",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Yutaka Yamaguchi",
   "repository": {
     "type": "git",
     "url": "https://github.com/memolog/mean-edge"
   },
+  "license" : "MIT",
   "endines": {
     "node": "~0.5.3",
     "npm": "~3.3.12"
   },
-  "script": {
-    "start": "backend/server.js"
-  },
-  "dependencies": {
-    "compression": "^1.4.3",
-    "debug": "^2.1.3",
-    "express": "^4.12.3",
-    "helmet": "^0.9.0",
-    "morgan": "^1.5.2",
-    "reflect-metadata": "^0.1.0",
-    "serve-favicon": "^2.2.0"
+  "scripts": {
+    "start": "node ./backend/server.js",
+    "postinstall": "cd backend && npm install && cd ../frontend && npm install",
+    "tsd-install": "cd backend && tsd reinstall && cd ../frontend && tsd reinstall"
   },
   "devDependencies": {
-    "angular2": "^2.0.0-alpha.23",
     "gulp": "^3.8.11",
     "gulp-nodemon": "^2.0.3",
     "gulp-shell": "^0.4.2",
     "gulp-typescript": "^2.6.0",
-    "merge2": "^0.3.5",
-    "npm-check-updates": "^1.5.1",
-    "typescript": "1.7.3",
-    "webpack": "^1.12.9"
+    "merge2": "^0.3.5"
   }
 }

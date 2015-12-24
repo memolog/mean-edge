@@ -2,19 +2,10 @@
 <html>
 <head>
   <title>MEAN EDGE</title>
-    <script src="/public/static/lib/reflect-metadata/Reflect.js"></script>
-    <script src="/public/static/lib/jspm_packages/es6-module-loader.js"></script>
-    <script src="/public/static/lib/jspm_packages/system.js"></script>
-    <script src="/public/static/config.js"></script>
-    <!-- <script src="/public/static/lib/angular/angular2.dev.js"></script> -->
+  <script src="/node_modules/angular2/bundles/angular2-polyfills.js"></script>
 </head>
 <body>
-  <app></app>
-  <script>
-System.import('zone.js').then(function(Zone) {
-  zone = zone.fork(Zone.longStackTraceZone);
-  System.import('site/app')
-});
-</script>
+  <app>Loading...</app>
+  <script src="/public/static/site/app.bundle.js"></script>
 </body>
 </html>

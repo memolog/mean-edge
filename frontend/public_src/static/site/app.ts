@@ -1,18 +1,13 @@
-/// <reference path="../../../typings/angular2/angular2.d.ts" />
-
-import {Component, View, bootstrap} from 'angular2/angular2';
+import {Component} from 'angular2/core';
 
 @Component({
-  selector: 'app'
-})
-@View({
+  selector: 'app',
   template: '<h1>Hello {{name}}</h1>'
 })
-class AppComponent {
+
+export class AppComponent {
   name: string
   constructor(){
     this.name = 'Yutaka'
   }
 }
-
-bootstrap(AppComponent);

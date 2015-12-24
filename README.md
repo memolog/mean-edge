@@ -1,43 +1,52 @@
-# mean-edge
+# MEAN-EDGE
 This is my personal sandbox to use cutting-edge features around MEAN (actually possibly included non-MEAN stack)
 
-### NOTES
-#### Install Node.js
+### Install prerequisites
+#### Install Node
+MEAN-EDGE works with Node.js version 5.3.0 (current latest stable)
+
 use official installer https://nodejs.org/download/
 
 or use homebrew http://brew.sh/ ```brew install node```
 
 or use nvm https://github.com/creationix/nvm ```nvm istall 5.3.0```
 
-(I'm currently checking this repository with 5.3.0) 
+#### Keep npm latest stable
+current latest stable is 3.5.3.
 
-#### Install npm global dependencies
 ```
-[sudo] npm install -g gulp
-[sudo] npm install -g typescript
-[sudo] npm install -g bower
+npm update npm -g
 ```
 
-I use jspm to resolve some angular dependencies (system.js, rx, traceur and zone.js).
-You don't have to install jspm to use this repository since all of the dependencies are in the repository already.
-```
-[sudo] npm install -g jspm
-```
-
-#### Install my app
+### Quick Start
+#### Install MEAN-EDGE
 ```
 git clone https://github.com/memolog/mean-edge.git
-npm install
+cd mean-edge
+npm install --production
 ```
 
 #### Start server
 ```
-gulp nodemon
+npm start
+```
+You can see http://localhost:3000/
+
+### Development
+#### Install global dependencies for development
+```
+[sudo] npm install -g gulp // Streaming Build System
+[sudo] npm install -g webpack // Module Bundler
+[sudo] npm install -g tsd // TypeScript Definition Manager
+[sudo] npm install -g typescript // TypeScript
 ```
 
-or just initiate server.js
+#### Install MEAN-EDGE for development
 ```
-node server.js
+git clone https://github.com/memolog/mean-edge.git
+cd mean-edge
+npm install
+npm run tsd-install // Install TypeScript Definitions
 ```
 
 #### Start server in development
@@ -47,25 +56,40 @@ gulp develop
 
 Start server with gulp nodemon task, and then watching file changes with gulp watch task.
 
-#### transpile angular2 files into ES5
+### Using Docker
+install Docker and Docker Compose
+* http://docs.docker.com/installation/mac/
+* http://docs.docker.com/compose/install/
+
+#### Start Docker
+If you didn't start boot2docker, start it first.
 ```
-cd node_modules/angular2
-npm install
-cd es6/dev
-node es5build.js -d ../../es5
+boot2docker start
 ```
 
-#### bunld my app with angular2 and zone.js
+#### Install with Docker Compose
+Move to the cloned project(mean-edge) top directory and then
 ```
-cd public/static
-jspm bundle site/app + zone.js app.js --inject
-```
-
-unbundle
-```
-jspm unbundle
+docker-compose up
 ```
 
+If you already create docker containers and you want to update them, try ```docker-compose build```
+
+You will wait a few second because a lot of resources are downloading and installing into Docker components.
+
+After finishied, you can check the local server is running.
+Copy the ip address retrieved with the above command, and Paste it to the browser
+
+```
+boot2docker ip
+```
+
+After you access the local server, you can see nginx logs in the terminal.
+
+If You want to stop docker components, execut ```docker-compose stop``` or Control+C in the terminal.
+
+
+### Some Notes (might be obsoluted)
 #### Build angular2 bundle with all dependencies
 Before install angular2 code from https://github.com/angular/angular, you might need to install protractor and tsd becuase they are required in the postinstall process
 
@@ -80,7 +104,7 @@ gulp bundle.js.dev.deps
 cp dist/angular.dev.js ../../public/static/lib/angular2/
 ```
 
-##### Trouble Shooting
+#### (Old) TypeScript issue
 If you found a lot of typescritp errros such like ``` 1153 'let' declarations are only available when targeting ECMAScript 6 and higher.```, check angular2/node_modules/typecsript version. If you could find its version is 1.4.1, npm install typescript again in the angular2 directory.
 
 That is what it happened on me, but I'm not sure why I got the wrong version of typescript. Anyway, as far as you use typescript 1.5 higher, It should work fine.
@@ -102,30 +126,7 @@ or use global tsc
 tsc src/public/static/site/app.ts --target es6 --outDir public/static/site/
 ```
 
-#### use Docker
-install Docker and Docker Compose
-* http://docs.docker.com/installation/mac/
-* http://docs.docker.com/compose/install/
-
-Move to the cloned project(mean-edge) top directory and then
-```
-docker-compose up
-```
-
-You will wait a few second because a lot of resources are downloading and installing into Docker components.
-
-After finishied, you can check the local server is running.
-Copy the ip address retrieved with the above command, and Paste it to the browser
-
-```
-boot2docker ip
-```
-
-After you access the local server, you can see nginx logs in the terminal.
-
-If You want to stop docker components, execut ```docker-compose stop``` or Control+C in the terminal.
-
-### Separate role between client and server
+#### Ideas about separating role between client and server
 - server: render an agnostic data and cache it
 - client: render authenticated or user/device specific data
 

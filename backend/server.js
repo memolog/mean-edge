@@ -3,14 +3,15 @@ var express = require('express');
 // middlewares
 var compression = require('compression');
 var helmet = require('helmet');
-var csp = require('./app/routes/middlewares/csp');
+var csp = require('./routes/middlewares/csp');
 var logger = require('morgan');
 var favicon = require('serve-favicon');
+var path = require('path');
 
 var debug = require('debug')('meanedge-server');
 
 var app = express();
-var root = __dirname;
+var root = path.resolve(__dirname + '/../');
 
 // compress all 'compressible' requests
 // https://github.com/expressjs/compression
@@ -19,10 +20,10 @@ app.use(compression());
 app.disable('x-powered-by');
 
 // favicon.icon
-app.use(favicon(root + '/public/static/favicon.ico'));
+app.use(favicon(root + '/frontend/public/static/favicon.ico'));
 
-app.use('/public/static', express.static(root + '/public/static'));
-app.use('/node_modules', express.static(root + '/node_modules'));
+app.use('/public/static', express.static(root + '/frontend/public/static'));
+app.use('/node_modules', express.static(root + '/frontend/node_modules'));
 
 app.use(logger('combined'));
 
@@ -34,12 +35,12 @@ app.use(helmet.ieNoOpen());
 
 var router = express.Router();
 router.get('/', function(req, res, next) {
-  return res.sendFile(root + '/public/static/index.html');
+  return res.sendFile(root + '/frontend/public/static/index.html');
 });
 
 app.use('/', router);
 
-app.use(function(res, res) {
+app.use(function(req, res) {
   res.status(404);
   res.send('Not Found');
 })

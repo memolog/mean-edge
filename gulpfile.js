@@ -31,7 +31,7 @@ gulp.task('watch', function() {
 
 gulp.task('nodemon', function() {
   nodemon({
-      script: 'server.js',
+      script: 'backend/server.js',
       ext: 'html js'
     })
     .on('restart', function() {
