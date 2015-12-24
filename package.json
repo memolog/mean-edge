@@ -12,7 +12,7 @@
     "npm": "~3.3.12"
   },
   "script": {
-    "start": "server.js"
+    "start": "backend/server.js"
   },
   "dependencies": {
     "compression": "^1.4.3",
