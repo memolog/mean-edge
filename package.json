@@ -14,8 +14,9 @@
   },
   "scripts": {
     "start": "node ./backend/server.js",
-    "postinstall": "cd backend && npm install && cd ../frontend && npm install",
-    "tsd-install": "cd backend && tsd reinstall && cd ../frontend && tsd reinstall"
+    "postinstall": "cd backend && npm install && cd ../frontend && npm install && cd ../webpack && npm install",
+    "tsd-install": "cd backend && tsd reinstall && cd ../frontend && tsd reinstall && cd ../webpack && tsd reinstall",
+    "webpack": "cd webpack && node ./node_modules/webpack/bin/webpack --config ./frontend.webpack.config.js"
   },
   "devDependencies": {
     "gulp": "^3.8.11",

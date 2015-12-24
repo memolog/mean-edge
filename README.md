@@ -36,8 +36,12 @@ You can see http://localhost:3000/
 #### Install global dependencies for development
 ```
 [sudo] npm install -g gulp // Streaming Build System
-[sudo] npm install -g webpack // Module Bundler
 [sudo] npm install -g tsd // TypeScript Definition Manager
+```
+
+You might also need
+```
+[sudo] npm install -g webpack // Module Bundler
 [sudo] npm install -g typescript // TypeScript
 ```
 

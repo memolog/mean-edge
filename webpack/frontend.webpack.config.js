@@ -4,10 +4,10 @@ module.exports = {
   context: __dirname,
   devtool: 'source-map',
   entry: {
-    'app': './public_src/static/site/boot.ts'
+    'app': '../frontend/public_src/static/site/boot.ts'
   },
   output: {
-    path: path.resolve(__dirname + '/public/static/site/'),
+    path: path.resolve(__dirname + '/../frontend/public/static/site/'),
     filename: '[name].bundle.js',
     chunkFilename: '[id].bundle.js'
   },
