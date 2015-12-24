@@ -1,1 +1,0 @@
-{"version":3,"sources":["di_annotations.js"],"names":[],"mappings":"AAOA;AAAA","file":"angular2/di_annotations.js","sourcesContent":["/**\n * @module\n * @public\n * @description\n * Annotations which control how the dependencies are resolved by the {@link Injector}.\n */\n\n"]}
