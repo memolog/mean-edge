@@ -1,16 +1,21 @@
 var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
   context: __dirname,
   devtool: 'source-map',
   entry: {
-    'app': '../frontend/src/static/site/boot.ts'
+    'app': '../frontend/src/static/site/boot.ts',
+    'vendor': '../frontend/src/static/site/vendor.ts'
   },
   output: {
     path: path.resolve(__dirname + '/../frontend/public/static/site/'),
     filename: '[name].bundle.js',
     chunkFilename: '[id].bundle.js'
   },
+  plugins:[
+    new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js")
+  ],
   resolve: {
     extensions: ['','.ts','.js']
   },
