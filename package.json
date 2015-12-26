@@ -16,13 +16,17 @@
     "start": "node ./backend/app/server.js",
     "postinstall": "cd backend && npm install && cd ../frontend && npm install && cd ../webpack && npm install",
     "tsd-install": "cd backend && tsd reinstall && cd ../frontend && tsd reinstall && cd ../webpack && tsd reinstall",
-    "webpack": "cd webpack && node ./node_modules/webpack/bin/webpack --config ./frontend.webpack.config.js"
+    "webpack": "cd webpack && node ../node_modules/webpack/bin/webpack --config ./frontend.webpack.config.js",
+    "clean": "find . -name 'node_modules' -type d -maxdepth 2 | xargs rm -rf"
   },
   "devDependencies": {
     "gulp": "^3.8.11",
     "gulp-nodemon": "^2.0.3",
     "gulp-shell": "^0.4.2",
     "gulp-typescript": "^2.6.0",
-    "merge2": "^0.3.5"
+    "merge2": "^0.3.5",
+    "ts-loader": "^0.7.2",
+    "typescript": "1.7.5",
+    "webpack": "^1.12.9"
   }
 }
