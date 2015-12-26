@@ -11,6 +11,8 @@ var env = require('./env');
 var logger = debug('meanedge-server');
 var app = express();
 var root = env.root;
+app.set('views', root + '/backend/views');
+app.set('view engine', 'jade');
 // compress all 'compressible' requests
 // https://github.com/expressjs/compression
 app.use(compression());

@@ -3,18 +3,14 @@ var merge = require('merge2');
 var ts = require('gulp-typescript');
 var nodemon = require('gulp-nodemon');
 var shell = require('gulp-shell')
+var typescript = require('typescript')
 
-var tsProject = ts.createProject({
-  typescript: require('typescript'),
-  noExternalResolve: true,
-  declarationFiles: false,
-  module: "commonjs"
-});
+var tsProject = ts.createProject('backend/tsconfig.json',{typescript: typescript});
 
 gulp.task('build.backend.js', function() {
   var tsResult = gulp.src([
-      'backend/src/*.ts',
-      'backend/src/**/*.ts',
+      'backend/src/*.{ts,tsx}',
+      'backend/src/**/*.{ts,tsx}',
       'backend/typings/**/*.ts'
     ])
     .pipe(ts(tsProject));
@@ -26,7 +22,7 @@ gulp.task('build.backend.js', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(['backend/src/*.ts','backend/src/**/*.ts'], ['build.backend.js']);
+  gulp.watch(['backend/src/*.{ts,tsx}','backend/src/**/*.{ts,tsx}'], ['build.backend.js']);
 });
 
 gulp.task('nodemon', function() {
