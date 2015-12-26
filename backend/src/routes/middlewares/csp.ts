@@ -1,13 +1,15 @@
 'use strict'
 
-var helmet = require('helmet');
+var helmet = require('helmet')
 
 var policy = {
   "default-src": "*",
   "script-src": [
+    "'unsafe-eval'",
     "'self'"
   ],
   "style-src": [
+    "'unsafe-inline'",
     "'self'"
   ],
   "connect-src": [
@@ -21,4 +23,4 @@ var policy = {
   ]
 }
 
-module.exports = helmet.contentSecurityPolicy(policy);
+export default helmet.contentSecurityPolicy(policy)

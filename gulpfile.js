@@ -8,30 +8,30 @@ var tsProject = ts.createProject({
   typescript: require('typescript'),
   noExternalResolve: true,
   declarationFiles: false,
-  target: 'es6'
+  module: "commonjs"
 });
 
-gulp.task('build.public.js', function() {
+gulp.task('build.backend.js', function() {
   var tsResult = gulp.src([
-      'src/public/static/**/*.ts',
-      'src/public/typings/**.ts'
+      'backend/src/*.ts',
+      'backend/src/**/*.ts',
+      'backend/typings/**/*.ts'
     ])
     .pipe(ts(tsProject));
 
   // Merge the two output streams, so this task is finished when the IO of both operations are done.
   return merge([
-    // tsResult.dts.pipe(gulp.dest('public/typings')),
-    tsResult.js.pipe(gulp.dest('public/static/'))
+    tsResult.js.pipe(gulp.dest('backend/app'))
   ]);
 });
 
 gulp.task('watch', function() {
-  gulp.watch('src/public/static/**/*.ts', ['build.public.js']);
+  gulp.watch(['backend/src/*.ts','backend/src/**/*.ts'], ['build.backend.js']);
 });
 
 gulp.task('nodemon', function() {
   nodemon({
-      script: 'backend/server.js',
+      script: 'backend/app/server.js',
       ext: 'html js'
     })
     .on('restart', function() {

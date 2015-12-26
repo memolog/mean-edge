@@ -144,3 +144,13 @@ tsc src/public/static/site/app.ts --target es6 --outDir public/static/site/
 - [ ] touch React
 - [ ] touch Dart
 - [ ] touch Broccoli
+
+### References
+#### Angular 2
+- https://angular.io/docs/ts/latest/quickstart.html
+- https://github.com/AngularClass/angular2-webpack-starter
+#### React (Server side)
+- https://github.com/mhart/react-server-example
+- https://egghead.io/lessons/react-introduction-to-server-side-react
+#### TypeScript
+- https://github.com/Microsoft/TypeScriptSamples/tree/master/imageboard

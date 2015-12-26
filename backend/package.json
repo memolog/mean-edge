@@ -7,13 +7,14 @@
     "type": "git",
     "url": "https://github.com/memolog/mean-edge"
   },
-  "license" : "MIT",
+  "license": "MIT",
   "dependencies": {
     "compression": "^1.4.3",
     "debug": "^2.1.3",
     "express": "^4.12.3",
     "helmet": "^0.9.0",
     "morgan": "^1.5.2",
+    "react": "^0.14.3",
     "serve-favicon": "^2.2.0"
   }
 }
