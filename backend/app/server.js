@@ -1,16 +1,22 @@
 'use strict';
 var express = require('express');
+var mongoose = require('mongoose');
+var debug = require('debug');
+var env = require('./env');
 // middlewares
 var compression = require('compression');
 var helmet = require('helmet');
 var morgan = require('morgan');
 var favicon = require('serve-favicon');
-var debug = require('debug');
 var csp_1 = require('./routes/middlewares/csp');
-var env = require('./env');
 var logger = debug('meanedge-server');
 var app = express();
 var root = env.root;
+var db = mongoose.connect(env.DB_URL);
+db.connection.on('error', function (err) {
+    console.log('Mongoose connection error occured');
+    console.log(err);
+});
 app.set('views', root + '/backend/views');
 app.set('view engine', 'jade');
 // compress all 'compressible' requests

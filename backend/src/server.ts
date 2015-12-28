@@ -1,20 +1,28 @@
 'use strict'
 
 import * as express from 'express';
+import * as mongoose from 'mongoose';
+import * as path from 'path';
+import * as debug from 'debug';
+import * as env from './env';
 
 // middlewares
 import * as compression from 'compression';
 import * as helmet from 'helmet';
 import * as morgan from 'morgan';
 import * as favicon from 'serve-favicon';
-import * as path from 'path';
-import * as debug from 'debug';
 import csp from './routes/middlewares/csp';
-import * as env from './env';
 
 let logger = debug('meanedge-server');
 let app = express();
 let root = env.root;
+
+let db = mongoose.connect(env.DB_URL);
+
+db.connection.on('error',function(err){
+  console.log('Mongoose connection error occured');
+  console.log(err);
+});
 
 app.set('views', root + '/backend/views');
 app.set('view engine', 'jade');
