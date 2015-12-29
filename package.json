@@ -7,24 +7,33 @@
     "type": "git",
     "url": "https://github.com/memolog/mean-edge"
   },
-  "license" : "MIT",
+  "license": "MIT",
   "endines": {
     "node": "~0.5.3",
     "npm": "~3.3.12"
   },
   "scripts": {
     "start": "node ./backend/app/server.js",
-    "postinstall": "cd backend && npm install && cd ../frontend && npm install && cd ../webpack && npm install",
+    "postinstall": "cd backend && npm install && cd ../frontend && npm install",
     "tsd-install": "cd backend && tsd reinstall && cd ../frontend && tsd reinstall && cd ../webpack && tsd reinstall",
     "webpack": "cd webpack && node ../node_modules/webpack/bin/webpack --config ./frontend.webpack.config.js",
     "clean-modules": "find . -name 'node_modules' -type d -maxdepth 2 | xargs rm -rf"
   },
   "devDependencies": {
+    "async": "^1.5.0",
+    "autoprefixer": "^6.2.2",
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^0.9.1",
     "gulp": "^3.8.11",
     "gulp-nodemon": "^2.0.3",
     "gulp-shell": "^0.4.2",
     "gulp-typescript": "^2.6.0",
     "merge2": "^0.3.5",
+    "node-sass": "^3.4.2",
+    "postcss-loader": "^0.8.0",
+    "resolve-url-loader": "^1.4.3",
+    "sass-loader": "^3.1.2",
+    "style-loader": "^0.13.0",
     "ts-loader": "^0.7.2",
     "typescript": "1.7.5",
     "webpack": "^1.12.9"
