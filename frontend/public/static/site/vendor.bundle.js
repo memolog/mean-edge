@@ -22,48 +22,48 @@
 /******/ 			return __webpack_require__(0);
 /******/ 		}
 /******/ 	};
-/******/
+
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-/******/
+
 /******/ 	// object to store loaded and loading chunks
 /******/ 	// "0" means "already loaded"
 /******/ 	// Array means "loading", array contains callbacks
 /******/ 	var installedChunks = {
 /******/ 		1:0
 /******/ 	};
-/******/
+
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-/******/
+
 /******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId])
 /******/ 			return installedModules[moduleId].exports;
-/******/
+
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			exports: {},
 /******/ 			id: moduleId,
 /******/ 			loaded: false
 /******/ 		};
-/******/
+
 /******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
+
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
-/******/
+
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
+
 /******/ 	// This file contains only the entry chunk.
 /******/ 	// The chunk loading function for additional chunks
 /******/ 	__webpack_require__.e = function requireEnsure(chunkId, callback) {
 /******/ 		// "0" is the signal for "already loaded"
 /******/ 		if(installedChunks[chunkId] === 0)
 /******/ 			return callback.call(null, __webpack_require__);
-/******/
+
 /******/ 		// an array means "currently loading".
 /******/ 		if(installedChunks[chunkId] !== undefined) {
 /******/ 			installedChunks[chunkId].push(callback);
@@ -75,21 +75,21 @@
 /******/ 			script.type = 'text/javascript';
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
-/******/
+
 /******/ 			script.src = __webpack_require__.p + "" + chunkId + ".bundle.js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
-/******/
+
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
-/******/
+
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-/******/
+
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
-/******/
+
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
 /******/ })
@@ -4039,7 +4039,7 @@
 	 * }
 	 *
 	 * var injector = Injector.resolveAndCreate([A]);
-	
+
 	 * try {
 	 *   injector.get(A);
 	 * } catch (e) {
@@ -15123,7 +15123,7 @@
 	 * `RenderProtoViewRef` is a counterpart to {@link ProtoViewRef} available in the Application
 	 * Context. But unlike `ProtoViewRef`, `RenderProtoViewRef` contains all static nested Proto Views
 	 * that are recursively merged into a single Render Proto View.
-	
+
 	 *
 	 * <!-- TODO: this is created by Renderer#createProtoView in the new compiler -->
 	 */
@@ -15145,8 +15145,8 @@
 	/*
 	  <div>foo</div>
 	  {{bar}}
-	
-	
+
+
 	  <div>foo</div> -> view 1 / fragment 1
 	  <ul>
 	    <template ngFor>
@@ -15154,8 +15154,8 @@
 	    </template>
 	  </ul>
 	  {{bar}}
-	
-	
+
+
 	  <div>foo</div> -> view 1 / fragment 1
 	  <ul>
 	    <template ngIf>
@@ -21521,7 +21521,7 @@
 	 * Creates and binds a control with a specified name to a DOM element.
 	 *
 	 * This directive can only be used as a child of {@link NgForm} or {@link NgFormModel}.
-	
+
 	 * ### Example
 	 *
 	 * In this example, we create the login and password controls.
@@ -28120,103 +28120,103 @@
 	/*
 	  This is a limited shim for ShadowDOM css styling.
 	  https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#styles
-	
+
 	  The intention here is to support only the styling features which can be
 	  relatively simply implemented. The goal is to allow users to avoid the
 	  most obvious pitfalls and do so without compromising performance significantly.
 	  For ShadowDOM styling that's not covered here, a set of best practices
 	  can be provided that should allow users to accomplish more complex styling.
-	
+
 	  The following is a list of specific ShadowDOM styling features and a brief
 	  discussion of the approach used to shim.
-	
+
 	  Shimmed features:
-	
+
 	  * :host, :host-context: ShadowDOM allows styling of the shadowRoot's host
 	  element using the :host rule. To shim this feature, the :host styles are
 	  reformatted and prefixed with a given scope name and promoted to a
 	  document level stylesheet.
 	  For example, given a scope name of .foo, a rule like this:
-	
+
 	    :host {
 	        background: red;
 	      }
 	    }
-	
+
 	  becomes:
-	
+
 	    .foo {
 	      background: red;
 	    }
-	
+
 	  * encapsultion: Styles defined within ShadowDOM, apply only to
 	  dom inside the ShadowDOM. Polymer uses one of two techniques to imlement
 	  this feature.
-	
+
 	  By default, rules are prefixed with the host element tag name
 	  as a descendant selector. This ensures styling does not leak out of the 'top'
 	  of the element's ShadowDOM. For example,
-	
+
 	  div {
 	      font-weight: bold;
 	    }
-	
+
 	  becomes:
-	
+
 	  x-foo div {
 	      font-weight: bold;
 	    }
-	
+
 	  becomes:
-	
-	
+
+
 	  Alternatively, if WebComponents.ShadowCSS.strictStyling is set to true then
 	  selectors are scoped by adding an attribute selector suffix to each
 	  simple selector that contains the host element tag name. Each element
 	  in the element's ShadowDOM template is also given the scope attribute.
 	  Thus, these rules match only elements that have the scope attribute.
 	  For example, given a scope name of x-foo, a rule like this:
-	
+
 	    div {
 	      font-weight: bold;
 	    }
-	
+
 	  becomes:
-	
+
 	    div[x-foo] {
 	      font-weight: bold;
 	    }
-	
+
 	  Note that elements that are dynamically added to a scope must have the scope
 	  selector added to them manually.
-	
+
 	  * upper/lower bound encapsulation: Styles which are defined outside a
 	  shadowRoot should not cross the ShadowDOM boundary and should not apply
 	  inside a shadowRoot.
-	
+
 	  This styling behavior is not emulated. Some possible ways to do this that
 	  were rejected due to complexity and/or performance concerns include: (1) reset
 	  every possible property for every possible selector for a given scope name;
 	  (2) re-implement css in javascript.
-	
+
 	  As an alternative, users should make sure to use selectors
 	  specific to the scope in which they are working.
-	
+
 	  * ::distributed: This behavior is not emulated. It's often not necessary
 	  to style the contents of a specific insertion point and instead, descendants
 	  of the host element can be styled selectively. Users can also create an
 	  extra node around an insertion point and style that node's contents
 	  via descendent selectors. For example, with a shadowRoot like this:
-	
+
 	    <style>
 	      ::content(div) {
 	        background: red;
 	      }
 	    </style>
 	    <content></content>
-	
+
 	  could become:
-	
+
 	    <style>
 	      / *@polyfill .content-container div * /
 	      ::content(div) {
@@ -28226,7 +28226,7 @@
 	    <div class="content-container">
 	      <content></content>
 	    </div>
-	
+
 	  Note the use of @polyfill in the comment above a ShadowDOM specific style
 	  declaration. This is a directive to the styling shim to use the selector
 	  in comments in lieu of the next selector when running under polyfill.
@@ -31312,4 +31312,3 @@
 
 /***/ }
 /******/ ]);
-//# sourceMappingURL=vendor.bundle.js.map

@@ -154,3 +154,10 @@ tsc src/public/static/site/app.ts --target es6 --outDir public/static/site/
 - https://egghead.io/lessons/react-introduction-to-server-side-react
 #### TypeScript
 - https://github.com/Microsoft/TypeScriptSamples/tree/master/imageboard
+#### Bootstrap
+- http://v4-alpha.getbootstrap.com/
+#### Webpack
+- Sass loader https://github.com/jtangelder/sass-loader
+- PostCSS loader https://github.com/postcss/postcss-loader
+- AutoPrefixer https://github.com/postcss/autoprefixer
+- StyleSheet https://webpack.github.io/docs/stylesheets.html

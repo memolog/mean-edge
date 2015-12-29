@@ -2,9 +2,12 @@ doctype html
 html
   head
     title MEAN-EDGE
+    link(rel='stylesheet' href='/public/static/site/app.css')
     script(src='/node_modules/angular2/bundles/angular2-polyfills.js')
     script(src='/public/static/site/vendor.bundle.js')
   body
-    app Loading...
+    div.jumbotron
+      app Loading...
+      <p>This is a my MEAN stack to test edge features</p>  
     script(src='/public/static/site/app.bundle.js')
     

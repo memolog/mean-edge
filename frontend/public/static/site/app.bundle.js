@@ -22,15 +22,16 @@ webpackJsonp([0],{
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
+	__webpack_require__(224);
 	var core_1 = __webpack_require__(22);
 	var AppComponent = (function () {
 	    function AppComponent() {
-	        this.name = 'Yutaka';
+	        this.name = 'World';
 	    }
 	    AppComponent = __decorate([
 	        core_1.Component({
 	            selector: 'app',
-	            template: '<h1>Hello {{name}}</h1>'
+	            template: '<h1>Hello, {{name}}</h1>'
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], AppComponent);
@@ -39,7 +40,13 @@ webpackJsonp([0],{
 	exports.AppComponent = AppComponent;
 
 
+/***/ },
+
+/***/ 224:
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
 /***/ }
 
 });
-//# sourceMappingURL=app.bundle.js.map
