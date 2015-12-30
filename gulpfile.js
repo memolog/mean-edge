@@ -21,8 +21,13 @@ gulp.task('build.backend.js', function() {
   ]);
 });
 
+gulp.task('build.frontend.webpack', shell.task([
+  'npm run webpack'
+]));
+
 gulp.task('watch', function() {
   gulp.watch(['backend/src/*.{ts,tsx}','backend/src/**/*.{ts,tsx}'], ['build.backend.js']);
+  gulp.watch(['frontend/src/static/site/*'], ['build.frontend.webpack']);
 });
 
 gulp.task('nodemon', function() {

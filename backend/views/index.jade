@@ -6,8 +6,26 @@ html
     script(src='/node_modules/angular2/bundles/angular2-polyfills.js')
     script(src='/public/static/site/vendor.bundle.js')
   body
-    div.jumbotron
-      app Loading...
-      <p>This is a my MEAN stack to test edge features</p>  
+    div
+      div#navbar-header.collapse
+        div.container.bg-inverse.p-a-1
+          h3 Collapsed content
+          p Toggleable via the navbar brand.
+      nav.navbar.navbar-light.navbar-fixed-top.bg-faded
+        div.container
+          button.navbar-toggler.hidden-sm-up(type='button' data-toggle='collapse' data-target='#exCollapsingNavbar2')
+          div.collapse.navbar-toggleable-xs#exCollapsingNavbar2
+          a.navbar-brand(href='#') MEAN EDGE
+          ul.nav.navbar-nav
+            li.nav-item.active
+              a.nav-link(href='#') Nav item
+    div.container
+      div.page-header.m-t-1
+        h1 Hello MEAN EDGE
+        p.lead This is a my MEAN stack to test edge features               
+        app Loading...
+    footer.navbar.navbar-fixed-bottom.navbar-light.bg-faded
+      div.container
+        span.text-muted Footer
     script(src='/public/static/site/app.bundle.js')
     
