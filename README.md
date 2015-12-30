@@ -93,6 +93,19 @@ After you access the local server, you can see nginx logs in the terminal.
 
 If You want to stop docker components, execut ```docker-compose stop``` or Control+C in the terminal.
 
+##### Remove Docker Containers
+```
+docker-compose stop
+docker-compose ps
+docker-compose rm
+```
+
+##### Trouble Shooting
+If you get 'no space left on device' error, you might have a lot of docker containers in your env. Run ```docker ps -a``` to check unnecessary containers, and remove them. If you want to remove all containers, do ``` docker rm `docker ps -a -q` ``` 
+
+If you didn't get resolved yet, you might increase your docker vm (boot2docker for your mac) diskspace. Read https://ryanfb.github.io/etc/2015/01/28/increasing_boot2docker_allocations_on_os_x.html
+
+(Or it's time to upgrade your local docker tool box https://docs.docker.com/mac/
 
 ### Some Notes (might be obsoluted)
 #### Build angular2 bundle with all dependencies

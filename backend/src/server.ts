@@ -21,6 +21,7 @@ let root = env.root;
 
 // Connect MongoDB
 let db = mongoose.connect(env.DB_URL);
+
 db.connection.on('error',function(err){
   console.log('Mongoose connection error occured');
   console.log(err);

@@ -7,10 +7,10 @@ nginx:
 node:
     build: .
     links:
-        - mongo
+        - db:db
     ports:
-        - "3000"
-mongo:
+        - "3000:3000"
+db:
     build: ./docker/mongo
     ports:
         - "27017:27017"
