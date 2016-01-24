@@ -144,6 +144,14 @@ or use global tsc
 tsc src/public/static/site/app.ts --target es6 --outDir public/static/site/
 ```
 
+#### NOTE to self: Webpack Code Splitting with TypeScript and Angular2
+If you want to split code with webpack, the following introduction would help you
+https://github.com/TypeStrong/ts-loader#user-content-loading-other-resources-and-code-splitting
+
+According to the above, we must declare require.ensure and must not use moduleResolution:"node" option in the tscondig.json because its moduleResolution configure implicitly refers nodeRequire. And it conflicts with our own require.ensure declaration.
+
+On the other hand, if we don't use moduleResolution:"node" and require angular2 module like reuiqre('../node_modules/angular2/core'), we cannot find some module defenitions inside angular2 module (so, we have to find them somehow).
+
 #### Ideas about separating role between client and server
 - server: render an agnostic data and cache it
 - client: render authenticated or user/device specific data
