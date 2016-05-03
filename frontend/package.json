@@ -1,20 +1,48 @@
 {
   "name": "meanedge-frontend",
+  "version": "0.3.0",
   "description": "This is my personal sandbox to use the cutting-edge features around MEAN",
-  "version": "0.1.0",
-  "author": "Yutaka Yamaguchi",
   "repository": {
     "type": "git",
     "url": "https://github.com/memolog/mean-edge"
   },
+  "scripts": {
+    "postinstall": "npm run copy && tsd install",
+    "copyStatic": "cp -r ../nginx/static ../backend/static",
+    "copy": "cp ./node_modules/angular2/bundles/angular2-polyfills.js ../nginx/static/js/",
+    "sass": "node-sass src/scss --output src/css",
+    "cleancss": "cleancss src/css/app.css --output ../nginx/static/css/app.css",
+    "build": "npm run buildCSS && npm run buildJS && npm run copyStatic",
+    "buildCSS": "npm run sass && npm run cleancss && npm run copyStatic",
+    "buildJS": "npm run tsc && npm run babel && npm run webpack && npm run uglifyjs",
+    "dev": "watch \"npm run buildJS\" src/ts --wait 5 & watch \"npm run buildCSS\" src/scss --wait 5 & lite-server -c ./lite-server.config.js",
+    "tsc": "tsc",
+    "babel": "babel ./src/es6 --out-dir ./src/es2015-webpack",
+    "webpack": "webpack",
+    "uglifyjs": "find src/bundle -name '*.js' | xargs uglifyjs --compress --output ../nginx/static/js/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yutaka Yamaguchi",
   "license": "MIT",
-  "devDependencies": {
-    "angular2": "^2.0.0-beta.0",
+  "dependencies": {
+    "angular2": "^2.0.0-beta.17",
     "bootstrap": "^4.0.0-alpha.2",
-    "es6-promise": "^3.0.2",
-    "es6-shim": "^0.33.3",
-    "reflect-metadata": "^0.1.2",
-    "rxjs": "^5.0.0-beta.0",
-    "zone.js": "^0.5.10"
+    "es6-shim": "^0.35.0",
+    "reflect-metadata": "0.1.2",
+    "rxjs": "5.0.0-beta.6",
+    "zone.js": "^0.6.12"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.7.7",
+    "babel-preset-es2015-webpack": "^6.4.1",
+    "clean-css": "^3.4.12",
+    "lite-server": "^2.2.0",
+    "node-sass": "^3.6.0",
+    "tsd": "^0.6.5",
+    "typescript": "^1.8.10",
+    "typings": "^0.8.1",
+    "uglify-js": "^2.6.2",
+    "watch": "^0.18.0",
+    "webpack": "^2.1.0-beta.6"
   }
 }

@@ -20,5 +20,5 @@ var policy = {
         "'self'"
     ]
 };
-exports.__esModule = true;
-exports["default"] = helmet.contentSecurityPolicy(policy);
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = helmet.contentSecurityPolicy(policy);

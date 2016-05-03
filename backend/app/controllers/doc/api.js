@@ -1,3 +1,4 @@
+"use strict";
 var mongoose = require('mongoose');
 var _ = require('lodash');
 var Doc = mongoose.model('Doc');

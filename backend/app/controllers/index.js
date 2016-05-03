@@ -1,3 +1,4 @@
+"use strict";
 function index(req, res) {
     // var Component = React.createClass({
     //  render: function(){

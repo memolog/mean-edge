@@ -8,5 +8,5 @@ router.route('/:id')
     .post(controller.checkBody, controller.create)
     .put(controller.checkBody, controller.update)
     .delete(controller.remove);
-exports.__esModule = true;
-exports["default"] = router;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = router;
