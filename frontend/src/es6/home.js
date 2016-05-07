@@ -8,25 +8,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component } from '@angular/core';
-import { LocationStrategy } from '@angular/common';
-import { Routes, ROUTER_DIRECTIVES, Router } from '@angular/router';
-import { HomeComponent } from './home';
-import { SignupComponent } from './signup';
-export let AppComponent = class AppComponent {
-    constructor(router, location) {
-        this.router = router;
-        this.location = location;
-    }
+export let HomeComponent = class HomeComponent {
 };
-AppComponent = __decorate([
-    Routes([
-        { path: '', component: HomeComponent },
-        { path: '/signup', component: SignupComponent }
-    ]),
+HomeComponent = __decorate([
     Component({
-        selector: 'app',
-        template: `<router-outlet></router-outlet>`,
-        directives: [ROUTER_DIRECTIVES]
+        template: `
+    <header class="main-header">
+      <h1>MEAN EDGE</h1>
+      <p>This is my personal sandbox to use the cutting-edge features around MEAN</p>
+    </header>
+    <div class="jumbotron">Hello from Angular2!</div>
+  `
     }), 
-    __metadata('design:paramtypes', [Router, LocationStrategy])
-], AppComponent);
+    __metadata('design:paramtypes', [])
+], HomeComponent);
