@@ -52,10 +52,6 @@ app.use(bodyParser.json());
 
 app.disable('x-powered-by');
 
-app.use(favicon(root + '/static/favicon.ico'));
-app.use('/', express.static(root + '/static'));    
-app.use('/static', express.static(root + '/static'));    
-
 app.use(morgan('combined'));
 
 app.use(helmet.frameguard());

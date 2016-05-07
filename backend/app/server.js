@@ -8,7 +8,6 @@ var glob = require('glob');
 var compression = require('compression');
 var helmet = require('helmet');
 var morgan = require('morgan');
-var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
 var csp_1 = require('./routes/middlewares/csp');
 var logger = debug('meanedge-server');
@@ -39,9 +38,6 @@ glob.sync(__dirname + '/models/*.js').forEach(function (path) { return require(p
 app.use(compression());
 app.use(bodyParser.json());
 app.disable('x-powered-by');
-app.use(favicon(root + '/static/favicon.ico'));
-app.use('/', express.static(root + '/static'));
-app.use('/static', express.static(root + '/static'));
 app.use(morgan('combined'));
 app.use(helmet.frameguard());
 app.use(helmet.xssFilter());
