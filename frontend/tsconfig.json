@@ -9,8 +9,14 @@
     "noImplicitAny": false,
     "outDir": "./src/es6/"
   },
-  "files": [
-    "./src/ts/app.ts",
-    "./src/ts/boot.ts"
+  "exclude": [
+    "node_modules",
+    "src/bundle",
+    "src/css",
+    "src/es2015-webpack",
+    "src/es6",
+    "src/scss",
+    "typings/main.d.ts",
+    "typings/main"    
   ]
 }

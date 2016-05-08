@@ -1,6 +1,5 @@
 "use strict";
-var mongoose = require('mongoose');
-var _ = require('lodash');
+const mongoose = require('mongoose');
 var Doc = mongoose.model('Doc');
 function param(req, res, next, id) {
     Doc
@@ -17,7 +16,7 @@ function param(req, res, next, id) {
 exports.param = param;
 function checkBody(req, res, next) {
     var data = req.body && req.body.doc;
-    if (!data || !_.isPlainObject(data)) {
+    if (!data) {
         res.status(400);
         return next(new Error("Data required"));
     }

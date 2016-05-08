@@ -1,7 +1,7 @@
 'use strict';
-var express = require('express');
-var controller = require('../../controllers/doc/api');
-var router = express.Router();
+const express = require('express');
+const controller = require('../../controllers/doc/api');
+let router = express.Router();
 router.param('id', controller.param);
 router.route('/:id')
     .get(controller.read)

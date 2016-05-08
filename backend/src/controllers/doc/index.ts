@@ -1,3 +1,3 @@
-export function index(req:Express.Request, res:Express.Response, next:Function){
+export function index(req, res, next){
   
 }

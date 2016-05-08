@@ -1,3 +1,5 @@
+/// <reference path="./server.d.ts" />
+
 'use strict'
 
 import * as express from 'express';
@@ -11,13 +13,15 @@ import * as glob from 'glob';
 import * as compression from 'compression';
 import * as helmet from 'helmet';
 import * as morgan from 'morgan';
-import * as favicon from 'serve-favicon';
 import * as bodyParser from 'body-parser';
 import csp from './routes/middlewares/csp';
 
 let logger = debug('meanedge-server');
 let app = express();
 let root = env.root;
+
+import * as passport from 'passport'
+import {localStorategy} from './controllers/auth/local'
 
 console.log(`Server now has started as ${process.env.NODE_ENV} mode`);
 
@@ -60,9 +64,13 @@ app.use(helmet.noSniff());
 app.use(helmet.ieNoOpen());
 app.use(csp);
 
+passport.use('local', localStorategy)
+
 import docRouter from './routes/doc/index'
+import authRouter from './routes/auth/index'
 
 app.use('/doc', docRouter)
+app.use('/auth', authRouter)
 
 app.use('/test', function(req, res, next){
   res.send('Backend server works!');
@@ -71,10 +79,8 @@ app.use('/test', function(req, res, next){
 app.use((req, res, next) => {
   res.status(404);
   res.send('Not Found');
-});
+})
 
 app.listen(3000, () => {
   logger('Server start listing port ' + 3000);
-});
-
-
+})

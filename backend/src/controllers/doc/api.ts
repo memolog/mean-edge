@@ -1,10 +1,9 @@
 import * as express from 'express';
 import * as mongoose from 'mongoose';
-import * as _ from 'lodash';
 
 var Doc = mongoose.model('Doc');
 
-export function param(req:express.Request, res:express.Response, next:Function, id:string){
+export function param(req, res, next, id:string){
   Doc
     .findById(id)
     .exec()
@@ -17,16 +16,16 @@ export function param(req:express.Request, res:express.Response, next:Function, 
     });
 }
 
-export function checkBody(req:express.Request, res:express.Response, next:Function){
+export function checkBody(req, res, next){
   var data = req.body && req.body.doc;
-  if (!data || !_.isPlainObject(data)) {
+  if (!data) {
     res.status(400);
     return next(new Error("Data required"));
   }
   return next();  
 }
 
-export function create(req:express.Request, res:express.Response, next:Function){
+export function create(req, res, next){
   var data = req.body.data;
   Doc
     .create(data)
@@ -40,13 +39,13 @@ export function create(req:express.Request, res:express.Response, next:Function)
     });
 }
 
-export function read(req:express.Request, res:express.Response, next:Function){
+export function read(req, res, next){
   return res.json({
     doc: req.doc
   });
 }
 
-export function update(req:express.Request, res:express.Response, next:Function){
+export function update(req, res, next){
   var data = req.body.data;
   var doc = req.doc as mongoose.Document;
   doc.set(data);
@@ -60,7 +59,7 @@ export function update(req:express.Request, res:express.Response, next:Function)
   });
 }
 
-export function remove(req:express.Request, res:express.Response, next:Function){
+export function remove(req, res, next){
   var doc = req.doc as mongoose.Document;
   doc.remove(function(err){
     if (err) {

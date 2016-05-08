@@ -1,5 +1,5 @@
 'use strict';
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 var DocSchema = new mongoose.Schema({
     title: String,
     ISBN: String,
