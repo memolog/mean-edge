@@ -26,6 +26,6 @@ export var AppComponent = function AppComponent(router, location) {
 };
 AppComponent = __decorate([Routes([{ path: '', component: HomeComponent }, { path: '/signup', component: SignupComponent }]), Component({
     selector: 'app',
-    template: "<router-outlet></router-outlet>",
+    template: "\n  <ul class=\"nav nav-tabs\">\n    <li class=\"nav-item\">\n      <a class=\"nav-link active\" [routerLink]=\"['/']\">Home</a>\n    </li>\n    <li class=\"nav-item\">\n      <a class=\"nav-link\" [routerLink]=\"['/signup']\">Sign in / Sign up</a>\n    </li>\n  </ul>\n  <router-outlet></router-outlet>\n  ",
     directives: [ROUTER_DIRECTIVES]
 }), __metadata('design:paramtypes', [Router, LocationStrategy])], AppComponent);

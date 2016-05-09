@@ -9,11 +9,11 @@ const UserSchema = new mongoose.Schema({
     password: String,
     salt: String
 });
-UserSchema.method('verifyPassword', (decryptedPassword) => {
+UserSchema.method('verifyPassword', function (decryptedPassword) {
     const hashResult = local_1.makeHash(decryptedPassword, this.salt);
     return this.password === hashResult.hashedPassword;
 });
-UserSchema.method('getToken', () => {
+UserSchema.method('getToken', function () {
     const payload = {
         id: this._id,
         expired: new Date(Date.now() + 86400000)

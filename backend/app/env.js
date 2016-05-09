@@ -8,3 +8,4 @@ exports.PRIVATE_KEY_PHRASE = process.env.PRIVATE_KEY_PHRASE || 'no-secret';
 exports.RSA_Key = cryptico.generateRSAKey(exports.PRIVATE_KEY_PHRASE, 1024);
 exports.TOKEN_SECRET = process.env.TOKEN_SECRET || 'no-secret';
 exports.LOCAL_AUTH_SALT = process.env.LOCAL_AUTH_SALT || 'no-secret-salt';
+exports.PORT = process.env.PORT || 3000;

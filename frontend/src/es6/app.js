@@ -25,7 +25,17 @@ AppComponent = __decorate([
     ]),
     Component({
         selector: 'app',
-        template: `<router-outlet></router-outlet>`,
+        template: `
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" [routerLink]="['/']">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/signup']">Sign in / Sign up</a>
+    </li>
+  </ul>
+  <router-outlet></router-outlet>
+  `,
         directives: [ROUTER_DIRECTIVES]
     }), 
     __metadata('design:paramtypes', [Router, LocationStrategy])

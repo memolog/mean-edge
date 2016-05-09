@@ -1,0 +1,1 @@
+export var API_HOST = 'localhost:3000';

@@ -18,5 +18,5 @@ export var HomeComponent = function HomeComponent() {
     _classCallCheck(this, HomeComponent);
 };
 HomeComponent = __decorate([Component({
-    template: "\n    <header class=\"main-header\">\n      <h1>MEAN EDGE</h1>\n      <p>This is my personal sandbox to use the cutting-edge features around MEAN</p>\n    </header>\n    <div class=\"jumbotron\">Hello from Angular2!</div>\n  "
+    template: "\n    <header class=\"main-header\">\n      <h1 class=\"main-header__title\">MEAN EDGE</h1>\n      <p class=\"main-header__description\">This is my personal sandbox to use the cutting-edge features around MEAN</p>\n    </header>\n  "
 }), __metadata('design:paramtypes', [])], HomeComponent);

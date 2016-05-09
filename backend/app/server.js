@@ -3,7 +3,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const debug = require('debug');
-const env = require('./env');
+const env_1 = require('./env');
 const glob = require('glob');
 // middlewares
 const compression = require('compression');
@@ -13,12 +13,12 @@ const bodyParser = require('body-parser');
 const csp_1 = require('./routes/middlewares/csp');
 let logger = debug('meanedge-server');
 let app = express();
-let root = env.root;
 const passport = require('passport');
 const local_1 = require('./controllers/auth/local');
+const user_1 = require('./models/user');
 console.log(`Server now has started as ${process.env.NODE_ENV} mode`);
 // Connect MongoDB
-let db = mongoose.connect(env.DB_URL);
+let db = mongoose.connect(env_1.DB_URL);
 db.connection.on('error', function (err) {
     console.log('Mongoose connection error occured');
     console.log(err);
@@ -39,6 +39,9 @@ glob.sync(__dirname + '/models/*.js').forEach((path) => require(path));
 // compress all 'compressible' requests
 // https://github.com/expressjs/compression
 app.use(compression());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(bodyParser.json());
 app.disable('x-powered-by');
 app.use(morgan('combined'));
@@ -47,6 +50,28 @@ app.use(helmet.xssFilter());
 app.use(helmet.noSniff());
 app.use(helmet.ieNoOpen());
 app.use(csp_1.default);
+if (process.env.NODE_ENV !== 'production') {
+    app.use(function (req, res, next) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS PUT DELETE');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+        next();
+    });
+}
+app.use(passport.initialize());
+passport.serializeUser(function (user, done) {
+    done(null, user._id);
+});
+passport.deserializeUser(function (id, done) {
+    user_1.User.findById(id)
+        .exec((err, user) => {
+        if (err) {
+            done(err, false);
+            return;
+        }
+        done(null, user);
+    });
+});
 passport.use('local', local_1.localStorategy);
 const index_1 = require('./routes/doc/index');
 const index_2 = require('./routes/auth/index');
@@ -59,6 +84,6 @@ app.use((req, res, next) => {
     res.status(404);
     res.send('Not Found');
 });
-app.listen(3000, () => {
-    logger('Server start listing port ' + 3000);
+app.listen(env_1.PORT, () => {
+    logger('Server start listing port ' + env_1.PORT);
 });
