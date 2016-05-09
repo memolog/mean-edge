@@ -74,6 +74,8 @@ if (process.env.NODE_ENV !== 'production') {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
     next()
   })
+  app.use('/js', express.static(root + '/nginx/static/js'));
+  app.use('/css', express.static(root + '/nginx/static/css'));
 }
 
 app.use(passport.initialize())
@@ -104,6 +106,12 @@ app.use('/auth', authRouter)
 app.use('/test', function(req, res, next){
   res.send('Backend server works!');
 });
+
+if (process.env.NODE_ENV !== 'production') {
+  app.use('/', function(req, res, next){
+    res.sendFile(root + '/nginx/static/index.html')
+  })
+}
 
 app.use((req, res, next) => {
   res.status(404);

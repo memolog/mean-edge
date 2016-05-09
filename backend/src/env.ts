@@ -2,7 +2,7 @@
 
 import * as path from 'path'
 const cryptico = require('cryptico-js')
-export const root = path.resolve(__dirname + '/../')
+export const root = path.resolve(__dirname + '/../../')
 const mongopath = process.env.NODE_ENV === 'production' ? 'mongo' : 'localhost'
 export const DB_URL = `mongodb://${mongopath}/meanedge-dev`
 export const PRIVATE_KEY_PHRASE = process.env.PRIVATE_KEY_PHRASE || 'no-secret'
