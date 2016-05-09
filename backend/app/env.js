@@ -1,7 +1,7 @@
 'use strict';
 const path = require('path');
 const cryptico = require('cryptico-js');
-exports.root = path.resolve(__dirname + '/../');
+exports.root = path.resolve(__dirname + '/../../');
 const mongopath = process.env.NODE_ENV === 'production' ? 'mongo' : 'localhost';
 exports.DB_URL = `mongodb://${mongopath}/meanedge-dev`;
 exports.PRIVATE_KEY_PHRASE = process.env.PRIVATE_KEY_PHRASE || 'no-secret';

@@ -57,6 +57,8 @@ if (process.env.NODE_ENV !== 'production') {
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
         next();
     });
+    app.use('/js', express.static(env_1.root + '/nginx/static/js'));
+    app.use('/css', express.static(env_1.root + '/nginx/static/css'));
 }
 app.use(passport.initialize());
 passport.serializeUser(function (user, done) {
@@ -80,6 +82,11 @@ app.use('/auth', index_2.default);
 app.use('/test', function (req, res, next) {
     res.send('Backend server works!');
 });
+if (process.env.NODE_ENV !== 'production') {
+    app.use('/', function (req, res, next) {
+        res.sendFile(env_1.root + '/nginx/static/index.html');
+    });
+}
 app.use((req, res, next) => {
     res.status(404);
     res.send('Not Found');

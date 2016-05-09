@@ -68707,7 +68707,7 @@
 /* 455 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var API_URL = 'http://localhost:3000';
+	var API_URL = '';
 	/* harmony export */ Object.defineProperty(exports, "a", {configurable: false, enumerable: true, get: function() { return API_URL; }});
 
 /***/ },
