@@ -34,31 +34,7 @@ router.route('/signin')
       return
     }
     
-    const email:string = req && req.body && req.body.email || '' 
-    const decryptedPassword:string = req && req.body && req.body.decryptedPassword || ''
-    
-    if (!email.length || !decryptedPassword.length) {
-      res.status(500)
-      next(new Error('Email or password was missed by some reason'))
-      return
-    }
-    
-    const hashResult = makeHash(decryptedPassword)
-    const userData:MEUser = {
-      email: email,
-      password: hashResult.hashedPassword,
-      salt: hashResult.salt
-    }
-    
-    createUser(userData)
-      .then((user) => {
-        res.json({
-          token: user.getToken()
-        })
-      })
-      .catch((err) => {
-        next(err)
-      })
+    next(new Error('User is not found'))
   })
 
 export default router

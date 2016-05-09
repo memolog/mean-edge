@@ -6,7 +6,7 @@ import * as express from 'express';
 import * as mongoose from 'mongoose';
 import * as path from 'path';
 import * as debug from 'debug';
-import * as env from './env';
+import {root, PORT, DB_URL} from './env';
 import * as glob from 'glob';
 
 // middlewares
@@ -18,15 +18,15 @@ import csp from './routes/middlewares/csp';
 
 let logger = debug('meanedge-server');
 let app = express();
-let root = env.root;
 
 import * as passport from 'passport'
 import {localStorategy} from './controllers/auth/local'
+import {User} from './models/user'
 
 console.log(`Server now has started as ${process.env.NODE_ENV} mode`);
 
 // Connect MongoDB
-let db = mongoose.connect(env.DB_URL);
+let db = mongoose.connect(DB_URL);
 
 db.connection.on('error',function(err){
   console.log('Mongoose connection error occured');
@@ -52,6 +52,9 @@ glob.sync(__dirname + '/models/*.js').forEach((path) => require(path));
 // compress all 'compressible' requests
 // https://github.com/expressjs/compression
 app.use(compression());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(bodyParser.json());
 
 app.disable('x-powered-by');
@@ -64,6 +67,32 @@ app.use(helmet.noSniff());
 app.use(helmet.ieNoOpen());
 app.use(csp);
 
+if (process.env.NODE_ENV !== 'production') {
+  app.use(function(req, res, next){
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS PUT DELETE')
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+    next()
+  })
+}
+
+app.use(passport.initialize())
+
+passport.serializeUser(function (user, done) {
+  done(null, user._id);
+});
+
+passport.deserializeUser(function (id, done) {
+  User.findById(id)
+    .exec((err, user) => {
+      if (err) {
+        done(err, false)
+        return
+      }
+      done(null, user)
+    })
+});
+  
 passport.use('local', localStorategy)
 
 import docRouter from './routes/doc/index'
@@ -81,6 +110,6 @@ app.use((req, res, next) => {
   res.send('Not Found');
 })
 
-app.listen(3000, () => {
-  logger('Server start listing port ' + 3000);
+app.listen(PORT, () => {
+  logger('Server start listing port ' + PORT);
 })

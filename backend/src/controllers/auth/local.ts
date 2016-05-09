@@ -24,7 +24,7 @@ export function makeHash(decryptedPassword:string, salt?:string):hashResult {
       salt = crypto.randomBytes(16).toString('base64')
     }
     const saltBuf = new Buffer(salt, 'base64')
-    const hashedPassword = crypto.pbkdf2Sync(`${LOCAL_AUTH_SALT}${decryptedPassword}`, saltBuf, 10000, 64)
+    const hashedPassword = crypto.pbkdf2Sync(`${LOCAL_AUTH_SALT}${decryptedPassword}`, saltBuf, 10000, 512, 'sha512')
     return {
         hashedPassword: hashedPassword.toString(),
         salt: salt
@@ -50,18 +50,39 @@ export function createUser(doc:MEUser):Promise<MEUserModel> {
 export const localStorategy = new passportLocal.Strategy(
   {
     usernameField: 'email',
-    passwordField: 'decryptedPassword',
+    passwordField: 'decryptedPassword'
   },
   (email, decryptedPassword, done) => {
-    User.findOne({ email: email }, (err, user) => {
+    User.findOne({ email: email })
+    .exec((err, user) => {
       if (err) { 
         done(err)
         return
       }
       
-      if (!user) {
-        done(null, false)
-        return
+      if (!user) {        
+        if (!email.length || !decryptedPassword.length) {
+          const err = new Error('Email or password was missed by some reason')
+          done(err)
+          return
+        }
+        
+        const hashResult = makeHash(decryptedPassword)
+        const userData:MEUser = {
+          email: email,
+          password: hashResult.hashedPassword,
+          salt: hashResult.salt
+        }
+        
+        createUser(userData)
+          .then((user) => {
+            done(null, user)
+          })
+          .catch((err) => {
+            done(err)
+          })
+        
+        return      
       }
       
       if (!user.verifyPassword(decryptedPassword)) { 

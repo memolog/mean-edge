@@ -29,12 +29,12 @@ const UserSchema = new mongoose.Schema({
   salt: String
 })
 
-UserSchema.method('verifyPassword', (decryptedPassword:string):boolean=>{
+UserSchema.method('verifyPassword', function(decryptedPassword:string):boolean{
   const hashResult = makeHash(decryptedPassword, this.salt)
   return this.password === hashResult.hashedPassword
 })
 
-UserSchema.method('getToken', ():string=>{
+UserSchema.method('getToken', function():string{
   const payload:MEUserPayload = {
     id: this._id,
     expired: new Date(Date.now()+86400000)

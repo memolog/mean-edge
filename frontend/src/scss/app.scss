@@ -1,20 +1,37 @@
 @import "bootstrap";
 
-$max-width: 500px;
+$container-max-width: 780px;
+$content-max-width: 580px;
+$base-text-color: #444;
+$subtle-text-color: #999; 
 
 body {
   background: white;
-  color: #444;
-}
-
-.main-header {
-  max-width: $max-width;
-  margin: 3em auto 1em;
-  text-align: center;
+  color: $base-text-color;
 }
 
 .main {
-  max-width: $max-width;
-  margin: 3em auto 3em;
+  max-width: $container-max-width;
+  margin: 1em auto 3em;
+}
+
+.main-header {
+  max-width: $content-max-width;
+  margin: 1em auto;
+  padding: 2em 1em;
   text-align: center;
+}
+
+.main-header__title {
+  font-weight: 100;
+}
+
+.main-header__description {
+  font-weight: 300;
+  color: $subtle-text-color;
+  margin: 0.5em 0 0;
+}
+
+.form-control-label {
+  font-weight: 300;
 }
