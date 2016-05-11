@@ -6,7 +6,7 @@ import * as express from 'express';
 import * as mongoose from 'mongoose';
 import * as path from 'path';
 import * as debug from 'debug';
-import {root, PORT, DB_URL} from './env';
+import {root, PORT, DB_URL, TOKEN_SECRET} from './env';
 import * as glob from 'glob';
 
 // middlewares
@@ -22,6 +22,8 @@ let app = express();
 import * as passport from 'passport'
 import {localStorategy} from './controllers/auth/local'
 import {User} from './models/user'
+
+import * as jwt from 'express-jwt'
 
 console.log(`Server now has started as ${process.env.NODE_ENV} mode`);
 
@@ -77,8 +79,10 @@ if (process.env.NODE_ENV !== 'production') {
   app.use('/js', express.static(root + '/nginx/static/js'));
   app.use('/css', express.static(root + '/nginx/static/css'));
   
-  app.use('/api/test', function(req, res, next){
+  app.use('/api/test', jwt({secret: TOKEN_SECRET}),
+  function(req, res, next){
     console.log(req.headers)
+    console.log(req.user)
     res.status(200)
     res.send('OK')
   })
