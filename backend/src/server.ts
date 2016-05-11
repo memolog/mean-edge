@@ -76,6 +76,12 @@ if (process.env.NODE_ENV !== 'production') {
   })
   app.use('/js', express.static(root + '/nginx/static/js'));
   app.use('/css', express.static(root + '/nginx/static/css'));
+  
+  app.use('/api/test', function(req, res, next){
+    console.log(req.headers)
+    res.status(200)
+    res.send('OK')
+  })
 }
 
 app.use(passport.initialize())

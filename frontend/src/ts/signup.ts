@@ -1,6 +1,7 @@
 import {Component} from '@angular/core'
 import {FORM_DIRECTIVES, FormBuilder, ControlGroup} from '@angular/common'
 import {Http, Response, Headers} from '@angular/http'
+import {AuthHttp} from 'angular2-jwt'
 import {API_URL} from './env'
 const cryptico = require('cryptico-js')
 
@@ -42,14 +43,12 @@ interface signinForm {
 
 export class SignupComponent {
   form: ControlGroup
-  http: Http
   
-  constructor(fb: FormBuilder, http: Http){
+  constructor(fb: FormBuilder, public http: Http, public authHttp:AuthHttp){
     this.form = fb.group({
       email: '',
       password: ''
     })
-    this.http = http
   }
   onSubmit(value: signinForm): void {
     this.http.get(`${API_URL}/auth/key`)
@@ -74,7 +73,13 @@ export class SignupComponent {
           headers: headers
         })
         .subscribe((res:Response) => {
-          // handle jwt token
+          const data = res.json()
+          const token = data.token
+          localStorage.setItem('id_token', token)
+          this.authHttp.get(`${API_URL}/api/test`)
+            .subscribe((res:Response) => {
+              console.log(res)
+            })
         })
       })
   }
