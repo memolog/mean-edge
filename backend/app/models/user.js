@@ -15,7 +15,7 @@ UserSchema.method('verifyPassword', function (decryptedPassword) {
 });
 UserSchema.method('getToken', function () {
     const payload = {
-        id: this._id,
+        _id: this._id,
         expired: new Date(Date.now() + 86400000)
     };
     return jwt.sign(payload, env_1.TOKEN_SECRET);

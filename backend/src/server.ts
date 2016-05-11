@@ -81,7 +81,6 @@ if (process.env.NODE_ENV !== 'production') {
   
   app.use('/api/test', jwt({secret: TOKEN_SECRET}),
   function(req, res, next){
-    console.log(req.headers)
     console.log(req.user)
     res.status(200)
     res.send('OK')

@@ -14,7 +14,7 @@ export interface MEUser {
 }
 
 export interface MEUserPayload {
-  id: mongoose.Types.ObjectId
+  _id: mongoose.Types.ObjectId
   expired: Date
 }
 
@@ -36,7 +36,7 @@ UserSchema.method('verifyPassword', function(decryptedPassword:string):boolean{
 
 UserSchema.method('getToken', function():string{
   const payload:MEUserPayload = {
-    id: this._id,
+    _id: this._id,
     expired: new Date(Date.now()+86400000)
   }
   return jwt.sign(payload, TOKEN_SECRET)

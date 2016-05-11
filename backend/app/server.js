@@ -61,7 +61,6 @@ if (process.env.NODE_ENV !== 'production') {
     app.use('/js', express.static(env_1.root + '/nginx/static/js'));
     app.use('/css', express.static(env_1.root + '/nginx/static/css'));
     app.use('/api/test', jwt({ secret: env_1.TOKEN_SECRET }), function (req, res, next) {
-        console.log(req.headers);
         console.log(req.user);
         res.status(200);
         res.send('OK');
