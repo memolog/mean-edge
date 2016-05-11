@@ -10,15 +10,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { FORM_DIRECTIVES, FormBuilder } from '@angular/common';
 import { Http, Headers } from '@angular/http';
+import { AuthHttp } from 'angular2-jwt';
 import { API_URL } from './env';
 const cryptico = require('cryptico-js');
 export let SignupComponent = class SignupComponent {
-    constructor(fb, http) {
+    constructor(fb, http, authHttp) {
+        this.http = http;
+        this.authHttp = authHttp;
         this.form = fb.group({
             email: '',
             password: ''
         });
-        this.http = http;
     }
     onSubmit(value) {
         this.http.get(`${API_URL}/auth/key`)
@@ -39,7 +41,13 @@ export let SignupComponent = class SignupComponent {
                 headers: headers
             })
                 .subscribe((res) => {
-                // handle jwt token
+                const data = res.json();
+                const token = data.token;
+                localStorage.setItem('id_token', token);
+                this.authHttp.get(`${API_URL}/api/test`)
+                    .subscribe((res) => {
+                    console.log(res);
+                });
             });
         });
     }
@@ -75,5 +83,5 @@ SignupComponent = __decorate([
     </form>
   `
     }), 
-    __metadata('design:paramtypes', [FormBuilder, Http])
+    __metadata('design:paramtypes', [FormBuilder, Http, AuthHttp])
 ], SignupComponent);

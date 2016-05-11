@@ -59,6 +59,11 @@ if (process.env.NODE_ENV !== 'production') {
     });
     app.use('/js', express.static(env_1.root + '/nginx/static/js'));
     app.use('/css', express.static(env_1.root + '/nginx/static/css'));
+    app.use('/api/test', function (req, res, next) {
+        console.log(req.headers);
+        res.status(200);
+        res.send('OK');
+    });
 }
 app.use(passport.initialize());
 passport.serializeUser(function (user, done) {

@@ -1,8 +1,16 @@
 import { enableProdMode, provide } from '@angular/core';
 import { bootstrap } from '@angular/platform-browser-dynamic';
 import { ROUTER_PROVIDERS } from '@angular/router';
-import { HTTP_PROVIDERS } from '@angular/http';
+import { Http, HTTP_PROVIDERS } from '@angular/http';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { AuthHttp, AuthConfig, AUTH_PROVIDERS } from 'angular2-jwt';
 import { AppComponent } from './app';
 enableProdMode();
-bootstrap(AppComponent, [ROUTER_PROVIDERS, HTTP_PROVIDERS, provide(LocationStrategy, { useClass: PathLocationStrategy })]);
+bootstrap(AppComponent, [ROUTER_PROVIDERS, HTTP_PROVIDERS, AUTH_PROVIDERS, provide(AuthHttp, {
+    useFactory: function useFactory(http) {
+        return new AuthHttp(new AuthConfig({
+            globalHeaders: [{ 'Content-Type': 'application/json' }]
+        }), http);
+    },
+    deps: [Http]
+}), provide(LocationStrategy, { useClass: PathLocationStrategy })]);
