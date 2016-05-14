@@ -16,11 +16,21 @@ export let AppComponent = class AppComponent {
     constructor(router, location) {
         this.router = router;
         this.location = location;
+        this.url = '/home';
+        this.router.changes.subscribe(() => {
+            this.url = this.router.serializeUrl(this.router.urlTree);
+        });
+    }
+    isActive(url) {
+        return this.url === url;
+    }
+    ngOnInit() {
+        this.router.navigate(['/home']);
     }
 };
 AppComponent = __decorate([
     Routes([
-        { path: '', component: HomeComponent },
+        { path: '/home', component: HomeComponent },
         { path: '/signup', component: SignupComponent }
     ]),
     Component({
@@ -28,10 +38,10 @@ AppComponent = __decorate([
         template: `
   <ul class="nav nav-tabs">
     <li class="nav-item">
-      <a class="nav-link active" [routerLink]="['/']">Home</a>
+      <a class="nav-link" [class.active]="isActive('/home')" [routerLink]="['/home']">Home</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" [routerLink]="['/signup']">Sign in / Sign up</a>
+      <a class="nav-link" [class.active]="isActive('/signup')" [routerLink]="['/signup']">Sign in / Sign up</a>
     </li>
   </ul>
   <router-outlet></router-outlet>

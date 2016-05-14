@@ -1,3 +1,5 @@
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18,14 +20,36 @@ import { LocationStrategy } from '@angular/common';
 import { Routes, ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { HomeComponent } from './home';
 import { SignupComponent } from './signup';
-export var AppComponent = function AppComponent(router, location) {
-    _classCallCheck(this, AppComponent);
+export var AppComponent = function () {
+    function AppComponent(router, location) {
+        var _this = this;
 
-    this.router = router;
-    this.location = location;
-};
-AppComponent = __decorate([Routes([{ path: '', component: HomeComponent }, { path: '/signup', component: SignupComponent }]), Component({
+        _classCallCheck(this, AppComponent);
+
+        this.router = router;
+        this.location = location;
+        this.url = '/home';
+        this.router.changes.subscribe(function () {
+            _this.url = _this.router.serializeUrl(_this.router.urlTree);
+        });
+    }
+
+    _createClass(AppComponent, [{
+        key: "isActive",
+        value: function isActive(url) {
+            return this.url === url;
+        }
+    }, {
+        key: "ngOnInit",
+        value: function ngOnInit() {
+            this.router.navigate(['/home']);
+        }
+    }]);
+
+    return AppComponent;
+}();
+AppComponent = __decorate([Routes([{ path: '/home', component: HomeComponent }, { path: '/signup', component: SignupComponent }]), Component({
     selector: 'app',
-    template: "\n  <ul class=\"nav nav-tabs\">\n    <li class=\"nav-item\">\n      <a class=\"nav-link active\" [routerLink]=\"['/']\">Home</a>\n    </li>\n    <li class=\"nav-item\">\n      <a class=\"nav-link\" [routerLink]=\"['/signup']\">Sign in / Sign up</a>\n    </li>\n  </ul>\n  <router-outlet></router-outlet>\n  ",
+    template: "\n  <ul class=\"nav nav-tabs\">\n    <li class=\"nav-item\">\n      <a class=\"nav-link\" [class.active]=\"isActive('/home')\" [routerLink]=\"['/home']\">Home</a>\n    </li>\n    <li class=\"nav-item\">\n      <a class=\"nav-link\" [class.active]=\"isActive('/signup')\" [routerLink]=\"['/signup']\">Sign in / Sign up</a>\n    </li>\n  </ul>\n  <router-outlet></router-outlet>\n  ",
     directives: [ROUTER_DIRECTIVES]
 }), __metadata('design:paramtypes', [Router, LocationStrategy])], AppComponent);

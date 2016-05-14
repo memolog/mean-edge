@@ -46148,6 +46148,8 @@
 	/* harmony import */ Object.defineProperty(__WEBPACK_IMPORTED_MODULE_2__angular_router___default, 'a', { get: __WEBPACK_IMPORTED_MODULE_2__angular_router___default });
 	/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home__ = __webpack_require__(457);
 	/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__signup__ = __webpack_require__(458);
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -46168,16 +46170,38 @@
 
 
 
-	var AppComponent = function AppComponent(router, location) {
-	    _classCallCheck(this, AppComponent);
+	var AppComponent = function () {
+	    function AppComponent(router, location) {
+	        var _this = this;
 
-	    this.router = router;
-	    this.location = location;
-	};
+	        _classCallCheck(this, AppComponent);
+
+	        this.router = router;
+	        this.location = location;
+	        this.url = '/home';
+	        this.router.changes.subscribe(function () {
+	            _this.url = _this.router.serializeUrl(_this.router.urlTree);
+	        });
+	    }
+
+	    _createClass(AppComponent, [{
+	        key: "isActive",
+	        value: function isActive(url) {
+	            return this.url === url;
+	        }
+	    }, {
+	        key: "ngOnInit",
+	        value: function ngOnInit() {
+	            this.router.navigate(['/home']);
+	        }
+	    }]);
+
+	    return AppComponent;
+	}();
 	/* harmony export */ Object.defineProperty(exports, "a", {configurable: false, enumerable: true, get: function() { return AppComponent; }});
-	AppComponent = __decorate([/* harmony import */__WEBPACK_IMPORTED_MODULE_2__angular_router__["Routes"].bind()([{ path: '', component: /* harmony import */__WEBPACK_IMPORTED_MODULE_3__home__["a"] }, { path: '/signup', component: /* harmony import */__WEBPACK_IMPORTED_MODULE_4__signup__["a"] }]), /* harmony import */__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"].bind()({
+	AppComponent = __decorate([/* harmony import */__WEBPACK_IMPORTED_MODULE_2__angular_router__["Routes"].bind()([{ path: '/home', component: /* harmony import */__WEBPACK_IMPORTED_MODULE_3__home__["a"] }, { path: '/signup', component: /* harmony import */__WEBPACK_IMPORTED_MODULE_4__signup__["a"] }]), /* harmony import */__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"].bind()({
 	    selector: 'app',
-	    template: "\n  <ul class=\"nav nav-tabs\">\n    <li class=\"nav-item\">\n      <a class=\"nav-link active\" [routerLink]=\"['/']\">Home</a>\n    </li>\n    <li class=\"nav-item\">\n      <a class=\"nav-link\" [routerLink]=\"['/signup']\">Sign in / Sign up</a>\n    </li>\n  </ul>\n  <router-outlet></router-outlet>\n  ",
+	    template: "\n  <ul class=\"nav nav-tabs\">\n    <li class=\"nav-item\">\n      <a class=\"nav-link\" [class.active]=\"isActive('/home')\" [routerLink]=\"['/home']\">Home</a>\n    </li>\n    <li class=\"nav-item\">\n      <a class=\"nav-link\" [class.active]=\"isActive('/signup')\" [routerLink]=\"['/signup']\">Sign in / Sign up</a>\n    </li>\n  </ul>\n  <router-outlet></router-outlet>\n  ",
 	    directives: [/* harmony import */__WEBPACK_IMPORTED_MODULE_2__angular_router__["ROUTER_DIRECTIVES"]]
 	}), __metadata('design:paramtypes', [/* harmony import */__WEBPACK_IMPORTED_MODULE_2__angular_router__["Router"], /* harmony import */__WEBPACK_IMPORTED_MODULE_1__angular_common__["LocationStrategy"]])], AppComponent);
 
