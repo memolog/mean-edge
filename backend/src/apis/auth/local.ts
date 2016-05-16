@@ -2,7 +2,8 @@ const cryptico = require('cryptico-js')
 import {RSA_Key, LOCAL_AUTH_SALT} from '../../env';
 import * as passportLocal from 'passport-local'
 import * as mongoose from 'mongoose'
-import {User, MEUser, MEUserModel} from '../../models/user'
+import {User} from '../../models/user'
+import {MEUser, MEUserModel} from '../../models/user.d'
 import * as crypto from 'crypto'
 import * as Promise from 'bluebird'
 

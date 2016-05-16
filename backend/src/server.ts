@@ -1,31 +1,31 @@
-/// <reference path="./server.d.ts" />
-
 'use strict'
 
-import * as express from 'express';
-import * as mongoose from 'mongoose';
-import * as path from 'path';
-import * as debug from 'debug';
-import {root, PORT, DB_URL, TOKEN_SECRET} from './env';
-import * as glob from 'glob';
+import * as express from 'express'
+import * as mongoose from 'mongoose'
+import * as path from 'path'
+import * as debug from 'debug'
+import {root, PORT, DB_URL, TOKEN_SECRET, COOKIE_SECRET, COOKIE_PATH} from './env'
+import * as glob from 'glob'
 
 // middlewares
-import * as compression from 'compression';
-import * as helmet from 'helmet';
-import * as morgan from 'morgan';
-import * as bodyParser from 'body-parser';
-import csp from './routes/middlewares/csp';
+import * as compression from 'compression'
+import * as helmet from 'helmet'
+import * as morgan from 'morgan'
+import * as bodyParser from 'body-parser'
+import * as cookieParser from 'cookie-parser'
+import csp from './routes/middlewares/csp'
+import authenticate from './routes/middlewares/authenticate'
 
-let logger = debug('meanedge-server');
+let logger = debug('meanedge-server')
 let app = express();
 
 import * as passport from 'passport'
-import {localStorategy} from './controllers/auth/local'
+import {localStorategy} from './apis/auth/local'
 import {User} from './models/user'
 
 import * as jwt from 'express-jwt'
 
-console.log(`Server now has started as ${process.env.NODE_ENV} mode`);
+console.log(`Server now has started as ${process.env.NODE_ENV} mode`)
 
 // Connect MongoDB
 let db = mongoose.connect(DB_URL);
@@ -51,9 +51,11 @@ process.on('SIGTERM', function(){
 // Load Mongoose Models
 glob.sync(__dirname + '/models/*.js').forEach((path) => require(path));
 
+app.use(cookieParser(COOKIE_SECRET))
+
 // compress all 'compressible' requests
 // https://github.com/expressjs/compression
-app.use(compression());
+app.use(compression())
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -79,9 +81,9 @@ if (process.env.NODE_ENV !== 'production') {
   app.use('/js', express.static(root + '/nginx/static/js'));
   app.use('/css', express.static(root + '/nginx/static/css'));
   
-  app.use('/api/test', jwt({secret: TOKEN_SECRET}),
-  function(req, res, next){
-    console.log(req.user)
+  app.use('/api/test', authenticate,
+  function(req:any, res, next){
+    console.log(req.token)
     res.status(200)
     res.send('OK')
   })

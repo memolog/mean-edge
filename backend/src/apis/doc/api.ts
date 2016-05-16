@@ -1,6 +1,4 @@
-import * as express from 'express';
 import * as mongoose from 'mongoose';
-
 var Doc = mongoose.model('Doc');
 
 export function param(req, res, next, id:string){

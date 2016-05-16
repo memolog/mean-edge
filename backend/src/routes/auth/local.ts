@@ -4,8 +4,10 @@ import * as express from 'express'
 const cryptico = require('cryptico-js')
 import * as passport from 'passport'
 import * as passportLocal from 'passport-local'
-import {decrypt, localStorategy, makeHash, createUser} from '../../controllers/auth/local'
-import {User, MEUserModel, MEUser} from '../../models/user'
+import {insertTokenInCookie} from '../../apis/auth/common'
+import {decrypt, localStorategy, makeHash, createUser} from '../../apis/auth/local'
+import {User} from '../../models/user'
+import {MEUserModel, MEUser} from '../../models/user.d'
 
 let router = express.Router()
 
@@ -28,8 +30,10 @@ router.route('/signin')
   (req, res, next) => {
     const user:MEUserModel = req && req.user || null
     if (user) {
+      const token = user.getToken()
+      insertTokenInCookie(res, token)
       res.json({
-        token: user.getToken()
+        success: true
       })
       return
     }

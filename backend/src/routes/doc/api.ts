@@ -2,7 +2,7 @@
 
 import * as express from 'express'
 import * as env from '../../env'
-import * as controller from '../../controllers/doc/api'
+import * as controller from '../../apis/doc/api'
 
 let router = express.Router()
 

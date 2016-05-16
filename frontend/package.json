@@ -19,7 +19,7 @@
     "tsc": "tsc",
     "babel": "babel ./src/es6 --out-dir ./src/es2015-webpack",
     "webpack": "webpack",
-    "uglifyjs": "find src/bundle -name '*.js' | xargs uglifyjs --compress --output ../nginx/static/js/app.js",
+    "uglifyjs": "cd src/bundle && for f in *.js; do uglifyjs $f --compress --output ../../../nginx/static/js/$f; done",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Yutaka Yamaguchi",

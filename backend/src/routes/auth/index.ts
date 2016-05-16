@@ -1,7 +1,7 @@
 'use strict'
 
 import * as express from 'express'
-import {sendPublicKey} from '../../controllers/auth/common'
+import {sendPublicKey} from '../../apis/auth/common'
 import localAuthRouter from './local'
 
 const router = express.Router()

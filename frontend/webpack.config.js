@@ -7,7 +7,8 @@ module.exports = {
     output: {
       path: 'src/bundle',
       filename: '[name].js',
-      chunkFilename: '[id].js'
+      chunkFilename: '[id].js',
+      publicPath: 'js/'
     },
     modules: ["node_modules"],
     // (was split into `root`, `modulesDirectories` and `fallback` in the old options)

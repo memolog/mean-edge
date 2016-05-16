@@ -5,7 +5,7 @@ import * as env from '../../env'
 
 let router = express.Router()
 
-import * as controller from '../../controllers/doc/index'
+import * as controller from '../../apis/doc/index'
 router.get('/', controller.index)
 
 import apiRouter from './api'
