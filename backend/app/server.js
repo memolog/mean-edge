@@ -1,4 +1,3 @@
-/// <reference path="./server.d.ts" />
 'use strict';
 const express = require('express');
 const mongoose = require('mongoose');
@@ -10,13 +9,14 @@ const compression = require('compression');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const csp_1 = require('./routes/middlewares/csp');
+const authenticate_1 = require('./routes/middlewares/authenticate');
 let logger = debug('meanedge-server');
 let app = express();
 const passport = require('passport');
-const local_1 = require('./controllers/auth/local');
+const local_1 = require('./apis/auth/local');
 const user_1 = require('./models/user');
-const jwt = require('express-jwt');
 console.log(`Server now has started as ${process.env.NODE_ENV} mode`);
 // Connect MongoDB
 let db = mongoose.connect(env_1.DB_URL);
@@ -37,6 +37,7 @@ process.on('SIGTERM', function () {
 });
 // Load Mongoose Models
 glob.sync(__dirname + '/models/*.js').forEach((path) => require(path));
+app.use(cookieParser(env_1.COOKIE_SECRET));
 // compress all 'compressible' requests
 // https://github.com/expressjs/compression
 app.use(compression());
@@ -60,8 +61,8 @@ if (process.env.NODE_ENV !== 'production') {
     });
     app.use('/js', express.static(env_1.root + '/nginx/static/js'));
     app.use('/css', express.static(env_1.root + '/nginx/static/css'));
-    app.use('/api/test', jwt({ secret: env_1.TOKEN_SECRET }), function (req, res, next) {
-        console.log(req.user);
+    app.use('/api/test', authenticate_1.default, function (req, res, next) {
+        console.log(req.token);
         res.status(200);
         res.send('OK');
     });

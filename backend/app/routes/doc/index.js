@@ -1,7 +1,7 @@
 'use strict';
 const express = require('express');
 let router = express.Router();
-const controller = require('../../controllers/doc/index');
+const controller = require('../../apis/doc/index');
 router.get('/', controller.index);
 const api_1 = require('./api');
 router.use('/api', api_1.default);

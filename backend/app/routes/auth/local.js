@@ -2,7 +2,8 @@
 const express = require('express');
 const cryptico = require('cryptico-js');
 const passport = require('passport');
-const local_1 = require('../../controllers/auth/local');
+const common_1 = require('../../apis/auth/common');
+const local_1 = require('../../apis/auth/local');
 let router = express.Router();
 router.route('/signin')
     .post((req, res, next) => {
@@ -22,8 +23,10 @@ router.route('/signin')
 }, passport.authenticate('local'), (req, res, next) => {
     const user = req && req.user || null;
     if (user) {
+        const token = user.getToken();
+        common_1.insertTokenInCookie(res, token);
         res.json({
-            token: user.getToken()
+            success: true
         });
         return;
     }

@@ -1,6 +1,6 @@
 'use strict';
 const mongoose = require('mongoose');
-const local_1 = require('../controllers/auth/local');
+const local_1 = require('../apis/auth/local');
 const jwt = require('jsonwebtoken');
 const env_1 = require('../env');
 const ObjectId = mongoose.Types.ObjectId;
