@@ -11,8 +11,8 @@
     "copy": "cp ./node_modules/angular2/bundles/angular2-polyfills.js ../nginx/static/js/",
     "sass": "node-sass src/scss --output src/css",
     "cleancss": "cleancss src/css/app.css --output ../nginx/static/css/app.css",
-    "build": "npm run buildCSS && npm run buildJS",
-    "buildCSS": "npm run sass && npm run cleancss",
+    "build": "npm run buildCSS && npm run buildJS && npm run rmBuildJS",
+    "buildCSS": "npm run sass && npm run cleancss && npm run rmBuildCSS",
     "buildJS": "npm run tsc && npm run babel && npm run webpack && npm run uglifyjs",
     "watch": "watch \"npm run buildJS\" src/ts --wait 5 & watch \"npm run buildCSS\" src/scss --wait 5",
     "dev": "npm run watch & lite-server -c ./lite-server.config.js",
@@ -20,7 +20,9 @@
     "babel": "babel ./src/es6 --out-dir ./src/es2015-webpack",
     "webpack": "webpack",
     "uglifyjs": "cd src/bundle && for f in *.js; do uglifyjs $f --compress --output ../../../nginx/static/js/$f; done",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "rmBuildJS": "rm -r src/bundle && rm -r src/es2015-webpack && rm -r src/es6",
+    "rmBuildCSS": "rm -r src/css"
   },
   "author": "Yutaka Yamaguchi",
   "license": "MIT",
