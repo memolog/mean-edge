@@ -20,4 +20,10 @@ UserSchema.method('getToken', function () {
     };
     return jwt.sign(payload, env_1.TOKEN_SECRET);
 });
+UserSchema.method('me', function () {
+    const me = {
+        email: this.email
+    };
+    return me;
+});
 exports.User = mongoose.model('User', UserSchema);

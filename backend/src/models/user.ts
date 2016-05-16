@@ -4,7 +4,7 @@ import * as mongoose from 'mongoose'
 import {makeHash} from '../apis/auth/local' 
 import * as jwt from 'jsonwebtoken'
 import {TOKEN_SECRET} from '../env'
-import {MEUser, MEUserModel, MEUserPayload} from './user.d'
+import {MEUser, MEUserModel, MEUserPayload, MEUserJSON} from './user.d'
 
 const ObjectId = mongoose.Types.ObjectId
 
@@ -25,6 +25,13 @@ UserSchema.method('getToken', function():string{
     expired: new Date(Date.now()+86400000)
   }
   return jwt.sign(payload, TOKEN_SECRET)
+})
+
+UserSchema.method('me', function():MEUserJSON{
+  const me:MEUserJSON = {
+    email: this.email
+  }
+  return me
 })
 
 export const User = mongoose.model<MEUserModel>('User', UserSchema)

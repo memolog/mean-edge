@@ -6,12 +6,17 @@ export interface MEUser {
   salt: string
 }
 
+export interface MEUserJSON {
+  email: string
+}
+
 export interface MEUserPayload {
   _id: mongoose.Types.ObjectId
   expired: Date
 }
 
 export interface MEUserModel extends MEUser, mongoose.Document{
-  verifyPassword: FunctionConstructor,
-  getToken: Function  
+  verifyPassword: Function,
+  getToken: Function,
+  me: Function
 }
