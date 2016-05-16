@@ -2,3 +2,7 @@
 node_modules
 npm-debug.log
 typings
+frontend/src/bundle
+frontend/src/css
+frontend/src/es2015-webpack
+frontend/src/es6
