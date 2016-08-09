@@ -8,6 +8,9 @@ import {insertTokenInCookie} from '../../apis/auth/common'
 import {decrypt, localStorategy, makeHash, createUser} from '../../apis/auth/local'
 import {User} from '../../models/user'
 import {MEUserModel, MEUser} from '../../models/user.d'
+import {Payload, MEPayload} from '../../models/payload'
+import * as jwt from 'jsonwebtoken'
+import {TOKEN_SECRET} from '../../env'
 
 let router = express.Router()
 
@@ -25,20 +28,34 @@ router.route('/signin')
       res.status(500)
       next(err)
     }
-  }, 
+  },
   passport.authenticate('local'),
   (req, res, next) => {
     const user:MEUserModel = req && req.user || null
-    if (user) {
-      const token = user.getToken()
-      insertTokenInCookie(res, token)
-      res.json({
-        success: true
-      })
+    if (!user) {
+      next(new Error('User is not found'))
       return
     }
-    
-    next(new Error('User is not found'))
+    Payload.create({
+      user: user._id,
+      expires: new Date(Date.now()+1209600000) // 2 weeks
+    }, function(err, payload){
+      if (err) {
+        next(err)
+        return
+      }
+      const payloadObject = payload.toObject()
+      jwt.sign(payloadObject, TOKEN_SECRET, {}, function(err, token){
+        if (err) {
+          next(err)
+          return
+        }
+        insertTokenInCookie(res, token)
+        res.json({
+          success: true
+        })
+      })
+    })
   })
 
 export default router

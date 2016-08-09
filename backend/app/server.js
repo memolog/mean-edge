@@ -10,6 +10,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const favicon = require('serve-favicon');
 const csp_1 = require('./routes/middlewares/csp');
 const authenticate_1 = require('./routes/middlewares/authenticate');
 let logger = debug('meanedge-server');
@@ -52,6 +53,7 @@ app.use(helmet.xssFilter());
 app.use(helmet.noSniff());
 app.use(helmet.ieNoOpen());
 app.use(csp_1.default);
+const api_1 = require('./apis/user/api');
 if (process.env.NODE_ENV !== 'production') {
     app.use(function (req, res, next) {
         res.setHeader('Access-Control-Allow-Origin', '*');
@@ -61,6 +63,7 @@ if (process.env.NODE_ENV !== 'production') {
     });
     app.use('/js', express.static(env_1.root + '/nginx/static/js'));
     app.use('/css', express.static(env_1.root + '/nginx/static/css'));
+    app.use(favicon(env_1.root + '/nginx/static/favicon.ico'));
     app.use('/api/test', authenticate_1.default, function (req, res, next) {
         console.log(req.token);
         res.status(200);
@@ -89,7 +92,16 @@ app.use('/auth', index_2.default);
 app.use('/test', function (req, res, next) {
     res.send('Backend server works!');
 });
+app.use('/users/me', authenticate_1.default, function (req, res, next) { console.log(req.token); next(); }, api_1.me);
 if (process.env.NODE_ENV !== 'production') {
+    app.use('/manifest.json', function (req, res, next) {
+        res.setHeader('Content-Type', 'application/json');
+        res.sendFile(env_1.root + '/nginx/static/manifest.json');
+    });
+    app.use('/worker.js', function (req, res, next) {
+        res.setHeader('Content-Type', 'application/javascript');
+        res.sendFile(env_1.root + '/nginx/static/worker.js');
+    });
     app.use('/', function (req, res, next) {
         res.sendFile(env_1.root + '/nginx/static/index.html');
     });

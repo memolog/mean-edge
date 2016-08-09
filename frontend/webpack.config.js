@@ -2,12 +2,13 @@ var path = require('path');
 
 module.exports = {
     entry: {
-      'app': path.resolve(__dirname, 'src/es2015-webpack/boot.js')
+      vendor: path.resolve(__dirname, 'src/es2015-webpack/vendor.js'),
+      app: path.resolve(__dirname, 'src/es2015-webpack/boot.js')
     },
     output: {
       path: 'src/bundle',
       filename: '[name].js',
-      chunkFilename: '[id].js',
+      chunkFilename: 'chunk_[id].js',
       publicPath: 'js/'
     },
     modules: ["node_modules"],

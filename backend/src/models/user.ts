@@ -1,12 +1,11 @@
 'use strict'
 
 import * as mongoose from 'mongoose'
-import {makeHash} from '../apis/auth/local' 
+import {makeHash} from '../apis/auth/local'
 import * as jwt from 'jsonwebtoken'
 import {TOKEN_SECRET} from '../env'
-import {MEUser, MEUserModel, MEUserPayload, MEUserJSON} from './user.d'
-
-const ObjectId = mongoose.Types.ObjectId
+import {MEUser, MEUserModel, MEUserJSON} from './user.d'
+import {MEPayload} from './payload'
 
 const UserSchema = new mongoose.Schema({
   email: String,
@@ -19,16 +18,9 @@ UserSchema.method('verifyPassword', function(decryptedPassword:string):boolean{
   return this.password === hashResult.hashedPassword
 })
 
-UserSchema.method('getToken', function():string{
-  const payload:MEUserPayload = {
-    _id: this._id,
-    expired: new Date(Date.now()+86400000)
-  }
-  return jwt.sign(payload, TOKEN_SECRET)
-})
-
 UserSchema.method('me', function():MEUserJSON{
   const me:MEUserJSON = {
+    _id: this._id,
     email: this.email
   }
   return me

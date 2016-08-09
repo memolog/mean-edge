@@ -7,12 +7,8 @@ export interface MEUser {
 }
 
 export interface MEUserJSON {
+  _id: string
   email: string
-}
-
-export interface MEUserPayload {
-  _id: mongoose.Types.ObjectId
-  expired: Date
 }
 
 export interface MEUserModel extends MEUser, mongoose.Document{

@@ -13,6 +13,7 @@ import * as helmet from 'helmet'
 import * as morgan from 'morgan'
 import * as bodyParser from 'body-parser'
 import * as cookieParser from 'cookie-parser'
+const favicon = require('serve-favicon')
 import csp from './routes/middlewares/csp'
 import authenticate from './routes/middlewares/authenticate'
 
@@ -34,7 +35,7 @@ db.connection.on('error',function(err){
   console.log('Mongoose connection error occured');
   console.log(err);
   if (process.env.NODE_ENV === 'production'){
-    process.exit(1);    
+    process.exit(1);
   }
 });
 
@@ -71,6 +72,8 @@ app.use(helmet.noSniff());
 app.use(helmet.ieNoOpen());
 app.use(csp);
 
+import {me} from './apis/user/api'
+
 if (process.env.NODE_ENV !== 'production') {
   app.use(function(req, res, next){
     res.setHeader('Access-Control-Allow-Origin', '*')
@@ -80,7 +83,8 @@ if (process.env.NODE_ENV !== 'production') {
   })
   app.use('/js', express.static(root + '/nginx/static/js'));
   app.use('/css', express.static(root + '/nginx/static/css'));
-  
+  app.use(favicon(root + '/nginx/static/favicon.ico'))
+
   app.use('/api/test', authenticate,
   function(req:any, res, next){
     console.log(req.token)
@@ -105,7 +109,7 @@ passport.deserializeUser(function (id, done) {
       done(null, user)
     })
 });
-  
+
 passport.use('local', localStorategy)
 
 import docRouter from './routes/doc/index'
@@ -118,7 +122,19 @@ app.use('/test', function(req, res, next){
   res.send('Backend server works!');
 });
 
+app.use('/users/me', authenticate, function(req:any, res, next){console.log(req.token); next()}, me)
+
 if (process.env.NODE_ENV !== 'production') {
+  app.use('/manifest.json', function(req, res, next){
+    res.setHeader('Content-Type', 'application/json')
+    res.sendFile(root + '/nginx/static/manifest.json')
+  })
+
+  app.use('/worker.js', function(req, res, next){
+    res.setHeader('Content-Type', 'application/javascript')
+    res.sendFile(root + '/nginx/static/worker.js')
+  })
+
   app.use('/', function(req, res, next){
     res.sendFile(root + '/nginx/static/index.html')
   })

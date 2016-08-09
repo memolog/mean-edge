@@ -11,12 +11,6 @@
   },
   "exclude": [
     "node_modules",
-    "src/bundle",
-    "src/css",
-    "src/es2015-webpack",
-    "src/es6",
-    "src/scss",
-    "typings/main.d.ts",
-    "typings/main"
+    "src/es6"
   ]
 }

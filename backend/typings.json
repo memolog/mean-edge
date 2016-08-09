@@ -1,26 +1,28 @@
 {
-  "ambientDependencies": {
-    "bluebird": "registry:dt/bluebird#2.0.0+20160319051630",
-    "body-parser": "registry:dt/body-parser#0.0.0+20160317120654",
+  "dependencies": {
+    "bluebird": "registry:npm/bluebird#3.3.4+20160531224558",
+    "jsonwebtoken": "registry:npm/jsonwebtoken#5.5.4+20160208220328",
+    "mongoose": "registry:npm/mongoose#4.3.5+20160610145311"
+  },
+  "globalDependencies": {
+    "body-parser": "registry:dt/body-parser#0.0.0+20160619023215",
     "compression": "registry:dt/compression#0.0.0+20160501162003",
     "cookie-parser": "registry:dt/cookie-parser#1.3.4+20160316155526",
     "debug": "registry:dt/debug#0.0.0+20160317120654",
     "express": "registry:dt/express#4.0.0+20160317120654",
     "express-jwt": "registry:dt/express-jwt#0.0.0+20160319033732",
-    "express-serve-static-core": "registry:dt/express-serve-static-core#0.0.0+20160322035842",
+    "express-serve-static-core": "registry:dt/express-serve-static-core#0.0.0+20160602151406",
     "express-unless": "registry:dt/express-unless#0.0.0+20160317120654",
     "glob": "registry:dt/glob#5.0.10+20160317120654",
-    "helmet": "registry:dt/helmet#0.0.0+20160501161936",
-    "jsonwebtoken": "registry:dt/jsonwebtoken#0.0.0+20160505173617",
+    "helmet": "registry:dt/helmet#0.0.0+20160512043842",
     "mime": "registry:dt/mime#0.0.0+20160316155526",
     "minimatch": "registry:dt/minimatch#2.0.8+20160317120654",
-    "mongoose": "registry:dt/mongoose#3.8.5+20160505185535",
-    "morgan": "registry:dt/morgan#1.2.2+20160317120654",
-    "node": "registry:dt/node#4.0.0+20160505172921",
+    "morgan": "registry:dt/morgan#1.7.0+20160524142355",
+    "node": "registry:dt/node#6.0.0+20160613154055",
     "passport": "registry:dt/passport#0.2.0+20160317120654",
     "passport-jwt": "registry:dt/passport-jwt#2.0.0+20160330163949",
     "passport-local": "registry:dt/passport-local#0.0.0+20160316155526",
     "passport-strategy": "registry:dt/passport-strategy#0.2.0+20160316155526",
-    "serve-static": "registry:dt/serve-static#0.0.0+20160501131543"
+    "serve-static": "registry:dt/serve-static#0.0.0+20160606155157"
   }
 }
