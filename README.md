@@ -3,16 +3,16 @@ This is my personal sandbox to use cutting-edge features around MEAN (actually p
 
 ### Install prerequisites
 #### Install Node
-MEAN-EDGE works with Node.js version 6.0.0 (current latest stable)
+MEAN-EDGE works with Node.js version 6 (current latest stable)
 
 use official installer https://nodejs.org/download/
 
 or use homebrew http://brew.sh/ ```brew install node```
 
-or use nvm https://github.com/creationix/nvm ```nvm istall 6.0.0```
+or use nvm https://github.com/creationix/nvm ```nvm istall 6```
 
 #### Keep npm latest stable
-current latest stable is 3.8.6.
+current latest stable is 3.10.6.
 If you need to update npm itself, do the following
 
 ```
@@ -21,7 +21,7 @@ npm update npm -g
 
 #### Install MongoDB
 If you want to use MongoDB in your local dev, You have to install it.
-see https://www.mongodb.org/downloads#production 
+see https://www.mongodb.org/downloads
 
 After installation, you run ```mongod``` and start mongoDB
 
