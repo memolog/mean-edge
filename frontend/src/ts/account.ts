@@ -5,12 +5,15 @@ import {API_URL} from './env'
 import {UserService} from './services/userService'
 
 @Component({
-  selector: 'div',
+  selector: 'account',
   directives: [],
-  template: `    <header class="main-header">
+  template: `
+  <div>
+    <header class="main-header">
       <h1 class="main-header__title">Your Account</h1>
     </header>
-    `,
+  </div>
+  `,
   providers: [UserService]
 })
 
